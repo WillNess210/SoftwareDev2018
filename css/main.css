@@ -6,6 +6,19 @@ body {
   text-align: center;
 }
 
+.recipe-template {
+	padding: 3rem 1.5rem;
+	text-align: left;
+}
+
 .profile-button {
 	margin-left: 1%;
+}
+
+.recipe-title{
+	text-align:center;
+}
+
+.recipe-item{
+	margin-left: 10%;
 }
