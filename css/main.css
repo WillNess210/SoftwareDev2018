@@ -2,8 +2,14 @@ body {
   padding-top: 5rem;
 }
 .starter-template {
-  padding: 3rem 1.5rem;
-  text-align: center;
+	padding: 3rem 1.5rem;
+	text-align: center;
+}
+
+
+.upload-template{
+	padding: 3rem 1.5rem;
+	text-align: left;
 }
 
 .recipe-template {
@@ -22,3 +28,23 @@ body {
 .recipe-item{
 	margin-left: 10%;
 }
+
+
+.bold{
+	font-weight: bold;
+}
+
+.fieldlabel{
+	font-weight: bold;
+	font-size: large;
+}
+
+.step-label{
+	font-size: normal;
+}
+.addbutton{
+	margin: 5px;
+}
+
+.addform{
+	margin-top: 5px;
