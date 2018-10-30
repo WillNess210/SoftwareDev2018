@@ -1,14 +1,14 @@
 //First Try
-/*const http = require('http');
+const http = require('http');
 const port=process.env.PORT || 3000
 const server = http.createServer((req, res) => {
 res.statusCode = 200;
 res.setHeader('Content-Type', 'text/html');
-res.end('<h1>Hello World</h1>');
+res.end('<h1>Djibouti Recipes</h1>');
 });
 server.listen(port,() => {
 console.log(`Server running at port `+port);
-});*/
+});
 
 //Second Try
 /*var express = require('express');
@@ -41,7 +41,7 @@ app.listen(port, function() {
 	ssl:true,
 	contentType: 'application/json'
 };
-*/
+
 
 const pgp = require('pg-promise')();
 const client = pgp(db);
@@ -60,7 +60,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 
 client.connect();
-
+*/
 
 /*
 app.get('/', function(req, disp){
