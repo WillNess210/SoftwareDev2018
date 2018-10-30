@@ -102,7 +102,7 @@ app.post('/addIngredients', function(req, disp){
 			disp.send(error);
 		});
 });
-
+*/
 /*
 client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
   if (err) throw err;
@@ -111,8 +111,7 @@ client.query('SELECT table_schema,table_name FROM information_schema.tables;', (
   }
   client.end();
 });
-*/
-*/
+
 app.listen(3000, function(){
 	console.log("Running on port 3000");
-});
+});*/
