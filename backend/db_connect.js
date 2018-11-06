@@ -29,6 +29,8 @@ app.post('/getRecipeInfo', function(req, disp){
 		.then(function(data){
 			$('.removable').remove();
 			console.log(JSON.stringify(data));
+			var jsonData = JSON.stringify(data);
+			/*
 			for (var i = 0; i < data.length; i++)
 			{
 				if (row.public == true)
@@ -39,7 +41,8 @@ app.post('/getRecipeInfo', function(req, disp){
 				
 			}
 			var temp = $.html();
-			disp.send(temp);
+			*/
+			disp.send(jsonData);
 		})
 		.catch(function(error){
 			disp.send(error);
