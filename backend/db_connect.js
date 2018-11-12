@@ -126,6 +126,28 @@ app.post('/uploadIngredients', function(req, disp){
 		});
 });
 
+app.post('/createAccount', function(req, disp){
+	console.log(req.body);
+	/**
+	* hash_pass = hash(req.body.password)
+	*/
+	client.any(`insert into users values ('${req.body.username}', '${req.body.email}'), '${hash_pass}')`, [true])
+		.then(function(data){
+			disp.send(`<!DOCTYPE html><html>
+					<head>
+						<title>Successfully added</title>
+					</head>
+					<body>
+						<h1>Successfully added values</h1>
+						<a href = "/">Go back to front page</a>
+					</body>
+				</html>`);
+		})
+		.catch(function(error){
+			disp.send(error);
+		});
+});
+
 /*
 app.get('/', function(req, disp){
 	client.any('SELECT * from users;', [true])
