@@ -23,37 +23,73 @@ app.use(bodyParser.urlencoded({ extended: true}));
 
 client.connect();
 
-app.post('/getRecipeInfo', function(req, disp){
-	console.log(req.body);
+//Get Recipe Info
+app.post('/getRecipeInfoByName', function(req, disp){
 	client.any(`select * from recipes where name = '${req.body.recipename}';`, [true])
 		.then(function(data){
-			$('.removable').remove();
 			console.log(JSON.stringify(data));
-			var jsonData = JSON.stringify(data);
-			/*
-			for (var i = 0; i < data.length; i++)
-			{
-				if (row.public == true)
-				{
-					var rows = data[i];
-					$('tbody').append(`tr class = "removable"><td>${rows.name}</td><td>${rows.category}</td><td><button>Open</button></tr>`);
-				}
-				
-			}
-			var temp = $.html();
-			*/
-			disp.send(jsonData);
+			disp.send(data);
 		})
 		.catch(function(error){
 			disp.send(error);
 		});
 });
 
+app.get('/getRecipeInfoByID', function(req, disp){
+	client.any(`SELECT * from recipes where id = ${req.body.rid};`, [true])
+		.then(function(data){
+			console.log(JSON.stringify(data));
+			disp.send(data);
+		}).catch(function(err){
+			disp.send(err);
+		});
+});
 
-//here
+app.get('/getIngredients', function(req, disp){
+	client.any(`SELECT * from ingredients where recipe_id = ${req.body.rid};`, [true])
+		.then(function(data){
+			console.log(JSON.stringify(data));
+			disp.send(data);
+		}).catch(function(err){
+			disp.send(err);
+		});
+});
+
+app.get('/getUserInfoByID', function(req, disp){
+	client.any(`SELECT * from users where id = ${req.body.uid};`, [true])
+		.then(function(data){
+			console.log(JSON.stringify(data));
+			disp.send(data);
+		}).catch(function(err){
+			disp.send(err);
+		});
+});
+
+app.get('/getUserInfoByUN', function(req, disp){
+	client.any(`SELECT * from users where username = ${req.body.un};`, [true])
+		.then(function(data){
+			console.log(JSON.stringify(data));
+			disp.send(data);
+		}).catch(function(err){
+			disp.send(err);
+		});
+});
+
+app.get('/getUserInfoByEmail', function(req, disp){
+	client.any(`SELECT * from users where email = ${req.body.email};`, [true])
+		.then(function(data){
+			console.log(JSON.stringify(data));
+			disp.send(data);
+		}).catch(function(err){
+			disp.send(err);
+		});
+});
+
+
+//Insert Recipe Info
 app.post('/uploadRecipe', function(req, disp){
 	console.log(req.body);
-	client.any(`insert into recipes values ('${req.body.user_id}', '${req.body.r_name}'), '${req.body.category}'), '${req.body.public}')`)
+	client.any(`insert into recipes values ('${req.body.user_id}', '${req.body.r_name}'), '${req.body.category}'), '${req.body.public}', '${req.body.steps}');`, [true])
 		.then(function(data){
 			disp.send(`<!DOCTYPE html><html>
 					<head>
@@ -70,9 +106,10 @@ app.post('/uploadRecipe', function(req, disp){
 		});
 });
 
+//Insert Ingredients ***DISCUSS***
 app.post('/uploadIngredients', function(req, disp){
 	console.log(req.body);
-	client.any(`insert into ingredients values ('${req.body.recipe_id}', '${req.body.i_name}'), '${req.body.amount}')`)
+	client.any(`insert into ingredients values ('${req.body.recipe_id}', '${req.body.i_name}'), '${req.body.amount}')`, [true])
 		.then(function(data){
 			disp.send(`<!DOCTYPE html><html>
 					<head>
@@ -89,25 +126,7 @@ app.post('/uploadIngredients', function(req, disp){
 		});
 });
 
-app.post('/uploadSteps', function(req, disp){
-	console.log(req.body);
-	client.any(`insert into users values (${req.body.recipe_id}', '${req.body.steps}')`)
-		.then(function(data){
-			disp.send(`<!DOCTYPE html><html>
-					<head>
-						<title>Successfully added</title>
-					</head>
-					<body>
-						<h1>Successfully added values</h1>
-						<a href = "/">Go back to front page</a>
-					</body>
-				</html>`);
-		})
-		.catch(function(error){
-			disp.send(error);
-		});
-});
-
+/*
 app.get('/', function(req, disp){
 	client.any('SELECT * from users;', [true])
 		.then(function(data){
@@ -127,3 +146,4 @@ app.get('/', function(req, disp){
 			disp.send(err);
 		});
 });
+*/

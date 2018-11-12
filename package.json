@@ -1,12 +1,13 @@
 {
-	"name" : "djibouti-recipes",
-	"version" : "1.0.0",
-	"scripts" : {
-		"start" : "node server.js"
+	"name": "djibouti-recipes",
+	"version": "1.0.0",
+	"scripts": {
+		"start": "node server.js"
 	},
-	"dependencies" : {
-		"express" : "4.16.4"
+	"dependencies": {
+		"express": "4.16.4",
+		"password-hash": "^1.2.2"
 	},
-	"author" : "letscodedjibouti",
-	"license" : "ISC"
+	"author": "letscodedjibouti",
+	"license": "ISC"
 }
