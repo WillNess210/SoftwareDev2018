@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true}));
 client.connect();
 
 //Get Recipe Info
-app.post('/getRecipeInfoByName', function(req, disp){
+app.get('/getRecipeInfoByName', function(req, disp){
 	client.any(`select * from recipes where name = '${req.body.recipename}';`, [true])
 		.then(function(data){
 			console.log(JSON.stringify(data));
