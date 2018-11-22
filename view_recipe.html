@@ -53,16 +53,18 @@
       <div class="recipe-template">
 		<p> rid:
 		<script type="text/javascript">
-		document.write(getAllUrlParams().rid);
+			document.write(getAllUrlParams().rid);
 		</script>
 		</p>
-		<p class = "lead recipe-item">By: (USERNAME)</p>
-        <h1 class = "recipe-title">Recipe Name Here</h1>
-		<p class="lead recipe-title">(CATEGORY) </p>
+		<p class = "lead recipe-item" id = "usernameholder">By: (USERNAME)</p>
+        <h1 class = "recipe-title" id = "recipe-title">Recipe Name Here</h1>
+		<p class="lead recipe-title" id = "recipe-category">(CATEGORY) </p>
 		<h2 class = "recipe-title"> Ingredients </h2>
-		<p class="lead recipe-item">1. </p>
+		<div id = "ingredients">
+		</div>
 		<h2 class = "recipe-title"> Steps </h2>
-		<p class="lead recipe-item">1. </p>
+		<div id = "steps">
+		</div>
       </div>
 	<hr>
 
@@ -81,6 +83,23 @@
     <script src="js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
-	
+	<script>
+	var JsonString = "{\"id\":6, \"owner_id\": 0, \"name\": \"Nothing Quiche\", \"category\": 2, \"public\": false, \"steps\": [\"Step 1\", \"Do Nothing\"]}";
+	var JSON = JSON.parse(JsonString);
+	$("#recipe-title").html(JSON.name);
+	$("#recipe-category").html(JSON.category);
+	$("#usernameholder").html("By: " + JSON.owner_id); // TODO lookup username using owner_id
+	JSON.steps.forEach(addSteps);
+	//JSON.ingredients.forEach(addIngredients);
+	function addSteps(value, index, array){
+		var text = "<p class = \"lead recipe-item\"> " + (index + 1) + ". " + value + "</p>";
+		$("#steps").append(text);
+	}
+	function addIngredients(value, index, array){
+		var text = "<p class = \"lead recipe-item\"> " + value + "</p>";
+		$("#ingredients").append(text);
+	}
+	//$("#").html();
+	</script>
   </body>
 </html>
