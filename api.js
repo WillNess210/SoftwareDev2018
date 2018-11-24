@@ -8,7 +8,7 @@ const app = express();
 const db = require('./queries')
 
 //set port
-var port = process.env.PORT || 8080;
+var port = process.env.PORT;
 
 app.use(express.static(__dirname));
 

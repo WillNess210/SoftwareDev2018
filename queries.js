@@ -8,11 +8,7 @@ const db =  {
 
 const Pool = require('pg').Pool;
 
-const pool = new Pool({
-	connectionString: "postgres://fyeznwonhtmkgq:bdf707c421a12f82fbf92c847662f9135d02a0a2bb283aaa531be9760954b3fb@ec2-50-16-196-57.compute-1.amazonaws.com:5432/db5vjg2n7ir74t",
-	ssl:true,
-	contentType: 'application/json'
-});
+var pool =  process.env.DATABASE_URL;
 
 
 const makeRecipe = function(req, res){

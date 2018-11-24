@@ -6,9 +6,9 @@
 	},
 	"dependencies": {
 		"express": "4.16.4",
-		"password-hash": "^1.2.2",
-		"body-parser": "^1.18.3",
-		"pg-promise": "^8.5.2"
+		"password-hash": "1.2.2",
+		"body-parser": "1.18.3",
+		"pg-promise": "8.5.2"
 	},
 	"author": "letscodedjibouti",
 	"license": "ISC"
