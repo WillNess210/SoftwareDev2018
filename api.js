@@ -8,7 +8,7 @@ const app = express();
 const db = require('./queries')
 
 //set port
-var port = process.env.PORT;
+var port = process.env.PORT || 8080;
 
 app.use(express.static(__dirname));
 
@@ -69,10 +69,6 @@ app.get("/secret/page/", function(req, res) {
 
 app.listen(port, function() {
 	console.log("app running");
-});
-
-app.listen(port, () => {
-  console.log(`router running on port ${port}.`)
 });
 
 
