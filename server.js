@@ -10,13 +10,14 @@ app.use(express.static(__dirname));
 
 app.get("/", function(req, res) {
 	res.render("index");
-})
+});
 
 app.get("/secret/page/", function(req, res) {
 	res.render("profile-test-image");
-})
+});
 
 app.listen(port, function() {
 	console.log("app running");
-})
+});
+
 
