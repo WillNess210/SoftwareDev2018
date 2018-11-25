@@ -82,17 +82,17 @@ app.get("/secret/page/", function(req, res) {
 	res.render("profile-test-image.jpg");
 });
 
-app.get("/login",function(req, res){
+app.get("/signin",function(req, res){
   res.render("login");
 });
 
-app.post("/login",function(req, res){
+app.post("/signin",function(req, res){
   //query here
 });
 
 app.get("/dashboard",function(req, res){
   if(!req.session.user){
-    res.redirect("/login");
+    res.redirect("/signin");
   }
   else{
     res.send(req.session.user.rows);
