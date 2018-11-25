@@ -83,7 +83,10 @@ app.get("/secret/page/", function(req, res) {
 });
 
 app.get("/signin",function(req, res){
-  res.render("login");
+  if(!req.session.user)
+    res.render("login");
+  else
+    res.redirect("/dashboard");
 });
 
 app.post("/signin",function(req, res){
