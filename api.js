@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const app = express();
 //const port = 3000;
 const db = require('./queries')
+var session = require('express-session');
+
 
 //set port
 var port = process.env.PORT || 8080;
@@ -33,12 +35,22 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.use(session({
+  secret: "change_this_later",
+  resave: false,
+  saveUninitialized: true
+}));
+//use req.session, store user especially when it comes to dashboard
+
 /*
 app.get('/', (request, response) => {
   //response.sendFile(__dirname + "/test.html");
   response.send('Beginning');
 });
 */
+
+
+//This is the API Routing
 
 router.get('/recipes', db.getRecipe);
 router.post('/recipes', db.makeRecipe);
@@ -59,6 +71,9 @@ router.get('/users/:id', db.getUsersByID);
 
 app.use('/api', router);
 
+
+//Routing for all other pages
+
 app.get("/", function(req, res) {
 	res.render("index");
 });
@@ -67,9 +82,29 @@ app.get("/secret/page/", function(req, res) {
 	res.render("profile-test-image.jpg");
 });
 
+app.get("/login",function(req, res){
+  res.render("login");
+});
+
+app.post("/login",function(req, res){
+  //query here
+});
+
+app.get("/dashboard",function(req, res){
+  if(!req.session.user){
+    res.redirect("/login");
+  }
+  else{
+    res.send(req.session.user.rows);
+    res.render("profile");
+  }
+});
+
 app.listen(port, function() {
 	console.log("app running");
 });
+
+
 
 
 
