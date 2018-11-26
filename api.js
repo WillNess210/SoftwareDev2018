@@ -7,6 +7,13 @@ const app = express();
 //const port = 3000;
 const db = require('./queries')
 var session = require('express-session');
+const Client = require('pg').Client;
+
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+    ssl: true,
+    contentType: 'application/json'
+});
 
 
 //set port
@@ -84,13 +91,23 @@ app.get("/secret/page/", function(req, res) {
 
 app.get("/signin",function(req, res){
   if(!req.session.user)
-    res.render("login");
+    res.sendFile("login.html");
   else
     res.redirect("/dashboard");
 });
 
 app.post("/signin",function(req, res){
   //query here
+  const {username, password} = req.body;
+  client.query('select * from users where email = $1 and hash_pass = $2', [username, password], function(err, results){
+    if(err){
+
+    }
+    else{
+      req.session.user = results;
+      res.redirect("/dashboard");
+    }
+  });
 });
 
 app.get("/dashboard",function(req, res){
@@ -99,7 +116,7 @@ app.get("/dashboard",function(req, res){
   }
   else{
     res.send(req.session.user.rows);
-    res.render("profile");
+    res.sendFile("profile.html");
   }
 });
 
