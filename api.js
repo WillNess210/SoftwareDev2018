@@ -91,7 +91,7 @@ app.get("/secret/page/", function(req, res) {
 
 app.get("/signin",function(req, res){
   if(!req.session.user)
-    res.sendFile("login.html");
+    res.render("login");
   else
     res.redirect("/dashboard");
 });
