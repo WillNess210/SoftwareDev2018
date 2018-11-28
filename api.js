@@ -19,7 +19,7 @@ const client = new Client({
 //set port
 var port = process.env.PORT || 8080;
 
-app.use(express.static(__dirname));
+//app.use(express.static(__dirname));
 
 app.use(bodyParser.json());
 
@@ -101,7 +101,7 @@ app.post("/signin",function(req, res){
   const {username, password} = req.body;
   client.query('select * from users where email = $1 and hash_pass = $2', [username, password], function(err, results){
     if(err){
-
+    	res.send("Wrong password");
     }
     else{
       req.session.user = results;
