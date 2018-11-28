@@ -119,6 +119,10 @@ app.get("/dashboard",function(req, res){
     res.redirect("/signin");
   }
   else{
+  	//This part needs to be edited, as we cannot do 2 send calls
+  	//Front end will need to be edited
+  	//Refer to the stack overflow link: https://stackoverflow.com/questions/37991995/passing-a-variable-from-node-js-to-html
+  	//we may need to use ejs
     res.send(req.session.user.rows);
     res.sendFile(__dirname +"/profile.html");
   }
