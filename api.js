@@ -86,7 +86,11 @@ app.get("/", function(req, res) {
 });
 
 app.get("/secret/page/", function(req, res) {
-	res.render("/profile-test-image.jpg");
+	res.sendFile(__dirname + "/profile-test-image.jpg");
+});
+
+app.get("/upload", function(req, res){
+	res.sendFile(__dirname + "/upload.html");
 });
 
 app.get("/signin",function(req, res){
@@ -116,7 +120,7 @@ app.get("/dashboard",function(req, res){
   }
   else{
     res.send(req.session.user.rows);
-    res.sendFile("/profile.html");
+    res.sendFile(__dirname +"/profile.html");
   }
 });
 
