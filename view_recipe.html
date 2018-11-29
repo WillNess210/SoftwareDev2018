@@ -69,42 +69,55 @@
 		$.getJSON(url, function( data ) {
 			JsonString = data;
 		}).then(function(){
-			console.log("incoming data");
-			console.log(JsonString);
 			var JSONSTRING = JsonString['0'];
 			$("#recipe-title").html(JSONSTRING.name);
-			$("#recipe-category").html(JSONSTRING.category);
-			console.log("USER ID: " + JSONSTRING.owner_id);
+			var cat = JSONSTRING.category;
+			if(cat == 0){
+				cat = "Breakfast";
+			}else if(cat == 1){
+				cat = "Lunch";
+			}else if(cat == 2){
+				cat = "Dinner";
+			}else if(cat == 3){
+				cat = "Snack";
+			}else if(cat == 4){
+				cat = "Dessert";
+			}else if(cat == 5){
+				cat = "Other";
+			}else{
+				cat = "Unknown Category";
+			}
+			$("#recipe-category").html(cat);
 			userId = JSONSTRING.owner_id;
 			// LOADING IN USERNAME \\
-			//userId = 2; // TODO REMOVE THIS ONCE RECIPES ARE LOADED BACK IN
 			url = "http://djibouti-recipe.herokuapp.com/api/users/" + userId;
-			console.log(url);
 			var userString = "";
 			$.getJSON(url, function( data ) {
 				userString = data;
 			}).then(function(){
-				console.log("USERNAME: " + userString['0'].username);
 				$("#usernameholder").html("By: " + userString['0'].username);
 			});
-			console.log(JSONSTRING.steps);
-			/*var myJson = JSON.parse(JSONSTRING.steps);
-			console.log("# steps: " + myJson.length);
-			for(var i = 0; i < myJson.length; i++){
-				var text = "<p class = \"lead recipe-item\"> " + (i + 1) + ". " + myJson[i] + "</p>";
+			var steps = JSONSTRING.steps.split("~");
+			for(var i = 0; i < steps.length; i++){
+				var text = "<p class = \"lead recipe-item\"> " + (i + 1) + ". " + steps[i] + "</p>";
 				$("#steps").append(text);
-			} */
+			}
 		});
 		
 		// LOADING IN INGREDIENTS \\
-		/*url = "http://djibouti-recipe.herokuapp.com/api/ingredients";
+		url = "http://djibouti-recipe.herokuapp.com/api/ingredients";
 		var ingString = "";
 		$.getJSON(url, function( data ) {
 			ingString = data;
 		}).then(function(){
-			console.log(ingString.length);
-			
-		}); */
+			for(var i = 0; i < ingString.length; i++){
+				if(ingString[i].recipe_id == rid){
+					console.log(ingString[i]);
+					var text = "<p class = \"lead recipe-item\"> " + (i + 1) + ". " + ingString[i].name + " - " + ingString[i].amount + "</p>";
+					$("#ingredients").append(text);
+				}
+			}
+		});
 	});
 	//$("#").html();
 	</script>
