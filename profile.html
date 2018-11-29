@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
-
+	<script src="js/main.js"> </script>
     <title>Title TBD</title>
 
     <!-- Bootstrap core CSS -->
@@ -27,7 +26,7 @@
       <div class="starter-template">
         <div class="profile-desc">
             <div>
-                <h2>username's Profile<br></h2>
+                <h2><div id = "usernameholder" style = "display:inline">username</div>'s Profile<br></h2>
             </div>
         </div>
         <h3>Shared Recipes</h3>
@@ -41,15 +40,7 @@
         </div>
 
         <div id="Created" class="tabcontent">
-            <div class="vertical-menu">
-              <a href="#">Recipe 1</a>
-              <a href="#">Recipe 2</a>
-              <a href="#">Recipe 3</a>
-              <a href="#">Recipe 4</a>
-              <a href="#">Recipe 5</a>
-              <a href="#">Recipe 6</a>
-              <a href="#">Recipe 7</a>
-              <a href="#">Recipe 8</a>
+            <div class="vertical-menu" id = "recipe-load">
             </div>
         </div>
 
@@ -84,14 +75,43 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+	<script src = "components/jquery/jquery-3.3.1.min.js"></script>
     <script>window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"><\/script>')</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
 	<script>
-		$('#nav').load('predone/navbar.html');
+		var uid = getAllUrlParams().uid;
+		$( document ).ready(function() {
+			$('#nav').load('predone/navbar.html');
+			var url = "http://djibouti-recipe.herokuapp.com/api/users/" + uid;
+			var result;
+			$.getJSON(url, function( data ) {
+				result = data;
+			}).then(function(){
+				var username = result['0'].username;
+				$("#usernameholder").html(username);
+			});
+			
+			url = "http://djibouti-recipe.herokuapp.com/api/recipes/";
+			var recipeResult;
+			$.getJSON(url, function( data ) {
+				recipeResult = data;
+			}).then(function(){
+				var numRecipes = recipeResult.length;
+				for(var i = 0; i < numRecipes; i++){
+					var ownerId = recipeResult[i]['owner_id'];
+					var recipeId = recipeResult[i]['id'];
+					var recipeName = recipeResult[i]['name'];
+					if(uid == ownerId){ // THIS RECIPE IS OWNED BY THE USER WE"RE LOOKING FOR
+						var text = "<a href = \"view_recipe.html?rid=" + recipeId + "\"> " + recipeName + " </a>";
+						//<a href="#">Recipe 2</a>
+						$("#recipe-load").append(text);
+					}
+				}
+			});
+		});
 	</script>
   </body>
 </html>
