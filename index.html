@@ -34,19 +34,19 @@
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-md-4">
-          <h2>Random Recipe 1</h2>
-		  <p> Recipe Description Here </p>
-          <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+          <h2 id = "rrt0">Random Recipe 1</h2>
+		  <!-- <p> Recipe Description Here </p> -->
+          <p><a class="btn btn-secondary" id = "rrl0" href="#" role="button">View details &raquo;</a></p>
         </div>
         <div class="col-md-4">
-          <h2>Random Recipe 2</h2>
-		  <p> Recipe Description Here </p>
-          <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+          <h2 id = "rrt1">Random Recipe 2</h2>
+		  <!-- <p> Recipe Description Here </p> -->
+          <p><a class="btn btn-secondary" id = "rrl1" href="#" role="button">View details &raquo;</a></p>
        </div>
         <div class="col-md-4">
-          <h2>Random Recipe 3</h2>
-		  <p> Recipe Description Here </p>
-          <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+          <h2 id = "rrt2">Random Recipe 3</h2>
+		  <!-- <p> Recipe Description Here </p> -->
+          <p><a class="btn btn-secondary" id = "rrl2" href="#" role="button">View details &raquo;</a></p>
         </div>
       </div>
     </div> <!-- /container -->
@@ -70,9 +70,31 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
 	<script>
-		//$( document ).ready(function() {
+		$( document ).ready(function() {
 			$('#nav').load('predone/navbar.html');
-		//}
+			url = "http://djibouti-recipe.herokuapp.com/api/recipes/";
+			var recipeResult;
+			$.getJSON(url, function( data ) {
+				recipeResult = data;
+			}).then(function(){
+				var numRecipes = recipeResult.length;
+				var numLoaded = 0;
+				var numToLoad = 3;
+				while(numLoaded != numToLoad){
+					var i = Math.floor(Math.random() * numRecipes);
+					var ownerId = recipeResult[i]['owner_id'];
+					var recipeId = recipeResult[i]['id'];
+					var recipeName = recipeResult[i]['name'];
+					var public = recipeResult[i]['public'];
+					if(public){ // THIS RECIPE IS OWNED BY THE USER WE"RE LOOKING FOR
+						$("#rrt" + numLoaded).html(recipeName);
+						$("#rrl" + numLoaded).attr("href", "view_recipe.html?rid=" + recipeId);
+						numLoaded++;
+						recipeResult[i]['public'] = false;
+					}
+				}
+			});
+		});
 	</script>
   </body>
 </html>
