@@ -64,7 +64,7 @@
 					var recipeId = recipeResult[i]['id'];
 					var recipeName = recipeResult[i]['name'];
 					var public = recipeResult[i]['public'];
-					if(i < 10 && public){ // THIS RECIPE IS OWNED BY THE USER WE"RE LOOKING FOR
+					if(public){ // THIS RECIPE IS OWNED BY THE USER WE"RE LOOKING FOR
 						var text = "<a href = \"view_recipe.html?rid=" + recipeId + "\"> " + recipeName + " </a></br>";
 						//<a href="#">Recipe 2</a>
 						$("#recipe-list").append(text);
