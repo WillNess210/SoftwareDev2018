@@ -27,13 +27,13 @@
 			//document.write(getAllUrlParams().rid);
 		</script>
 		</p> -->
-		<p class = "lead recipe-item" id = "usernameholder">By: (USERNAME)</p>
+		<p class = "lead recipe-item valid" id = "usernameholder">By: (USERNAME)</p>
         <h1 class = "recipe-title" id = "recipe-title">Recipe Name Here</h1>
 		<p class="lead recipe-title" id = "recipe-category">(CATEGORY) </p>
-		<h2 class = "recipe-title"> Ingredients </h2>
+		<h2 class = "recipe-title valid"> Ingredients </h2>
 		<div id = "ingredients">
 		</div>
-		<h2 class = "recipe-title"> Steps </h2>
+		<h2 class = "recipe-title valid"> Steps </h2>
 		<div id = "steps">
 		</div>
       </div>
@@ -69,6 +69,14 @@
 		$.getJSON(url, function( data ) {
 			JsonString = data;
 		}).then(function(){
+			console.log("DATA STRING LENGTH: " + JsonString.length)
+			if(JsonString.length == 0){ // NO RECIPE EXISTS
+				$("#recipe-title").html("NO RECIPE FOUND WITH ID " + rid);
+				$("#recipe-category").html("<a href = \"index.html\"> Return Home </a>");
+				$(".valid").html("");
+				
+				return;
+			}
 			var JSONSTRING = JsonString['0'];
 			$("#recipe-title").html(JSONSTRING.name);
 			var cat = JSONSTRING.category;
@@ -112,7 +120,6 @@
 		}).then(function(){
 			for(var i = 0; i < ingString.length; i++){
 				if(ingString[i].recipe_id == rid){
-					console.log(ingString[i]);
 					var text = "<p class = \"lead recipe-item\"> " + (i + 1) + ". " + ingString[i].name + " - " + ingString[i].amount + "</p>";
 					$("#ingredients").append(text);
 				}
