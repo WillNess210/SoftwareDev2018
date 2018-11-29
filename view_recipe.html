@@ -117,9 +117,10 @@
 		$.getJSON(url, function( data ) {
 			ingString = data;
 		}).then(function(){
+			var ingNum = 1;
 			for(var i = 0; i < ingString.length; i++){
 				if(ingString[i].recipe_id == rid){
-					var text = "<p class = \"lead recipe-item\"> " + (i + 1) + ". " + ingString[i].name + " - " + ingString[i].amount + "</p>";
+					var text = "<p class = \"lead recipe-item\"> " + (ingNum++) + ". " + ingString[i].name + " - " + ingString[i].amount + "</p>";
 					$("#ingredients").append(text);
 				}
 			}
