@@ -26,8 +26,8 @@
       <div class="starter-template">
         <h1>Exploring Recipes</h1>
 		<p class="lead">Take a look at some great recipes from our users!</p>
-		<div id = "recipe-list">
-		
+		<div id = "recipe-list" style = "display: grid; grid-template-columns: 1fr 1fr; grid-column-gap: 10px; grid-row-gap: 10px;">
+			
 		</div>
       </div>
 	<hr>
@@ -57,7 +57,7 @@
 			}).then(function(){
 				var numRecipes = recipeResult.length;
 				var numLoaded = 0;
-				var numToLoad = 5;
+				var numToLoad = 6;
 				while(numLoaded != numToLoad){
 					var i = Math.floor(Math.random() * numRecipes);
 					var ownerId = recipeResult[i]['owner_id'];
@@ -65,7 +65,7 @@
 					var recipeName = recipeResult[i]['name'];
 					var public = recipeResult[i]['public'];
 					if(public){ // THIS RECIPE IS OWNED BY THE USER WE"RE LOOKING FOR
-						var text = "<a href = \"view_recipe.html?rid=" + recipeId + "\"> " + recipeName + " </a></br>";
+						var text = "<a class = \"btn btn-secondary\" href = \"view_recipe.html?rid=" + recipeId + "\"> " + recipeName + " </a>";
 						//<a href="#">Recipe 2</a>
 						$("#recipe-list").append(text);
 						numLoaded++;
