@@ -27,7 +27,7 @@
 			//document.write(getAllUrlParams().rid);
 		</script>
 		</p> -->
-		<p class = "lead recipe-item valid" id = "usernameholder">By: (USERNAME)</p>
+		<a href = "#" class = "lead recipe-item valid" id = "usernameholder">By: (USERNAME)</a>
         <h1 class = "recipe-title" id = "recipe-title">Recipe Name Here</h1>
 		<p class="lead recipe-title" id = "recipe-category">(CATEGORY) </p>
 		<h2 class = "recipe-title valid"> Ingredients </h2>
@@ -103,6 +103,7 @@
 				userString = data;
 			}).then(function(){
 				$("#usernameholder").html("By: " + userString['0'].username);
+				$("#usernameholder").attr("href","profile.html?uid=" + userString['0'].id);
 			});
 			var steps = JSONSTRING.steps.split("~");
 			for(var i = 0; i < steps.length; i++){
