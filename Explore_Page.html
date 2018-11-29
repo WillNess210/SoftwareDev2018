@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
 
     <title>Title TBD</title>
 
@@ -26,8 +25,10 @@
 
       <div class="starter-template">
         <h1>Exploring Recipes</h1>
-	      <p class="lead">Take a look at some great recipes from our users!</p>
+		<p class="lead">Take a look at some great recipes from our users!</p>
+		<div id = "recipe-list">
 		
+		</div>
       </div>
 	<hr>
 
@@ -47,9 +48,32 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
 	<script>
-		//$( document ).ready(function() {
+		$( document ).ready(function() {
 			$('#nav').load('predone/navbar.html');
-		//}
+			url = "http://djibouti-recipe.herokuapp.com/api/recipes/";
+			var recipeResult;
+			$.getJSON(url, function( data ) {
+				recipeResult = data;
+			}).then(function(){
+				var numRecipes = recipeResult.length;
+				var numLoaded = 0;
+				var numToLoad = 5;
+				while(numLoaded != numToLoad){
+					var i = Math.floor(Math.random() * numRecipes);
+					var ownerId = recipeResult[i]['owner_id'];
+					var recipeId = recipeResult[i]['id'];
+					var recipeName = recipeResult[i]['name'];
+					var public = recipeResult[i]['public'];
+					if(i < 10 && public){ // THIS RECIPE IS OWNED BY THE USER WE"RE LOOKING FOR
+						var text = "<a href = \"view_recipe.html?rid=" + recipeId + "\"> " + recipeName + " </a></br>";
+						//<a href="#">Recipe 2</a>
+						$("#recipe-list").append(text);
+						numLoaded++;
+						recipeResult[i]['public'] = false;
+					}
+				}
+			});
+		});
 	</script>
   </body>
 </html>
