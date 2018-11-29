@@ -102,7 +102,7 @@
 			$.getJSON(url, function( data ) {
 				userString = data;
 			}).then(function(){
-				$("#usernameholder").html("By: " + userString['0'].username);
+				$("#usernameholder").html("Created By: " + userString['0'].username);
 				$("#usernameholder").attr("href","profile.html?uid=" + userString['0'].id);
 			});
 			var steps = JSONSTRING.steps.split("~");
