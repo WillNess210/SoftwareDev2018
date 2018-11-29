@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
 	<script src="js/main.js"> </script>
     <title>Title TBD</title>
 
@@ -23,11 +22,11 @@
     <div class="container">
 
       <div class="recipe-template">
-		<p> rid:
+		<!--<p> rid:
 		<script type="text/javascript">
-			document.write(getAllUrlParams().rid);
+			//document.write(getAllUrlParams().rid);
 		</script>
-		</p>
+		</p> -->
 		<p class = "lead recipe-item" id = "usernameholder">By: (USERNAME)</p>
         <h1 class = "recipe-title" id = "recipe-title">Recipe Name Here</h1>
 		<p class="lead recipe-title" id = "recipe-category">(CATEGORY) </p>
@@ -57,34 +56,54 @@
     <script src="js/ie10-viewport-bug-workaround.js"></script>
 	<script>
 	var JsonString = "{\"id\":6, \"owner_id\": 0, \"name\": \"Nothing Quiche\", \"category\": 2, \"public\": false, \"steps\": [\"Step 1\", \"Do Nothing\"]}";
-	var url = "http://djibouti-recipe.herokuapp.com/api/recipes/10";
+	var rid = getAllUrlParams().rid;
+	if(rid == undefined){
+		rid = 0;
+	}
+	
 	$( document ).ready(function() {
 		$('#nav').load('predone/navbar.html');
+		var userId = -1;
+		// LOADING IN RECIPE \\
+		var url = "http://djibouti-recipe.herokuapp.com/api/recipes/" + rid;
 		$.getJSON(url, function( data ) {
-			console.log("yoyo");
-			console.log(data);
 			JsonString = data;
 		}).then(function(){
-			//var JSONSTRING = JSON.parse(JsonString['0']);
+			console.log("incoming data");
+			console.log(JsonString);
 			var JSONSTRING = JsonString['0'];
-			var test = Object.values(JSON.parse(JSONSTRING.steps));
-			console.log(JSONSTRING.name);
 			$("#recipe-title").html(JSONSTRING.name);
 			$("#recipe-category").html(JSONSTRING.category);
-			$("#usernameholder").html("By: " + JSONSTRING.owner_id); // TODO lookup username using owner_id
-			test.forEach(addSteps);
-			//JSON.ingredients.forEach(addIngredients);
-			function addSteps(value, index, array){
-				var text = "<p class = \"lead recipe-item\"> " + (index + 1) + ". " + value + "</p>";
+			console.log("USER ID: " + JSONSTRING.owner_id);
+			userId = JSONSTRING.owner_id;
+			console.log(JSONSTRING.steps);
+			/*var myJson = JSON.parse(JSONSTRING.steps);
+			console.log("# steps: " + myJson.length);
+			for(var i = 0; i < myJson.length; i++){
+				var text = "<p class = \"lead recipe-item\"> " + (i + 1) + ". " + myJson[i] + "</p>";
 				$("#steps").append(text);
-			}
-			function addIngredients(value, index, array){
-				var text = "<p class = \"lead recipe-item\"> " + value + "</p>";
-				$("#ingredients").append(text);
-			}
+			} */
 		});
-		
-		
+		// LOADING IN USERNAME \\
+		//userId = 2; // TODO REMOVE THIS ONCE RECIPES ARE LOADED BACK IN
+		url = "http://djibouti-recipe.herokuapp.com/api/users/" + userId;
+		console.log(url);
+		var userString = "";
+		$.getJSON(url, function( data ) {
+			userString = data;
+		}).then(function(){
+			console.log("USERNAME: " + userString['0'].username);
+			$("#usernameholder").html("By: " + userString['0'].username);
+		});
+		// LOADING IN INGREDIENTS \\
+		/*url = "http://djibouti-recipe.herokuapp.com/api/ingredients";
+		var ingString = "";
+		$.getJSON(url, function( data ) {
+			ingString = data;
+		}).then(function(){
+			console.log(ingString.length);
+			
+		}); */
 	});
 	//$("#").html();
 	</script>
