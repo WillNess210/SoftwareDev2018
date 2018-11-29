@@ -26,20 +26,20 @@
       <div class="starter-template">
         <div class="profile-desc">
             <div>
-                <h2><div id = "usernameholder" style = "display:inline">username</div>'s Profile<br></h2>
+                <h2 id = "maintitle"><div id = "usernameholder" style = "display:inline">username</div>'s Profile<br></h2>
             </div>
         </div>
-        <h3>Shared Recipes</h3>
+        <h3 id = "sectitle">Shared Recipes</h3>
         <br>
         <div class="row">
 
 
 
-        <div class="tab">
+        <div class="tab valid">
           <button class="tablinks" onclick="openCity(event, 'Created')" id="defaultOpen">Created</button>
         </div>
 
-        <div id="Created" class="tabcontent">
+        <div id="Created" class="tabcontent valid">
             <div class="vertical-menu" id = "recipe-load">
             </div>
         </div>
@@ -90,6 +90,12 @@
 			$.getJSON(url, function( data ) {
 				result = data;
 			}).then(function(){
+				if(result.length == 0){ // NO USER EXISTS
+					$("#maintitle").html("NO USER FOUND WITH ID " + uid);
+					$("#sectitle").html("<a href = \"index.html\"> Return Home </a>");
+					$(".valid").html("");
+					return;
+				}
 				var username = result['0'].username;
 				$("#usernameholder").html(username);
 			});
