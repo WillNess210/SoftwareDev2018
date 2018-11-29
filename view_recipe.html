@@ -76,6 +76,17 @@
 			$("#recipe-category").html(JSONSTRING.category);
 			console.log("USER ID: " + JSONSTRING.owner_id);
 			userId = JSONSTRING.owner_id;
+			// LOADING IN USERNAME \\
+			//userId = 2; // TODO REMOVE THIS ONCE RECIPES ARE LOADED BACK IN
+			url = "http://djibouti-recipe.herokuapp.com/api/users/" + userId;
+			console.log(url);
+			var userString = "";
+			$.getJSON(url, function( data ) {
+				userString = data;
+			}).then(function(){
+				console.log("USERNAME: " + userString['0'].username);
+				$("#usernameholder").html("By: " + userString['0'].username);
+			});
 			console.log(JSONSTRING.steps);
 			/*var myJson = JSON.parse(JSONSTRING.steps);
 			console.log("# steps: " + myJson.length);
@@ -84,17 +95,7 @@
 				$("#steps").append(text);
 			} */
 		});
-		// LOADING IN USERNAME \\
-		//userId = 2; // TODO REMOVE THIS ONCE RECIPES ARE LOADED BACK IN
-		url = "http://djibouti-recipe.herokuapp.com/api/users/" + userId;
-		console.log(url);
-		var userString = "";
-		$.getJSON(url, function( data ) {
-			userString = data;
-		}).then(function(){
-			console.log("USERNAME: " + userString['0'].username);
-			$("#usernameholder").html("By: " + userString['0'].username);
-		});
+		
 		// LOADING IN INGREDIENTS \\
 		/*url = "http://djibouti-recipe.herokuapp.com/api/ingredients";
 		var ingString = "";
