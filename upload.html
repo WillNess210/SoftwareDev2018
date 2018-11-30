@@ -116,10 +116,14 @@
 		});
 		//$("#myform").submit();
 		console.log("Trying to post");
-		$.post(
-			"http://djibouti-recipe.herokuapp.com/api/recipes",
-			{ name : "Testing From Code" }
-		);
+		$.post("http://djibouti-recipe.herokuapp.com/api/recipes", //Required URL of the page on server
+		{ // Data Sending With Request To Server
+			name:"testing from jquery"
+		},
+		function(response,status){ // Required Callback Function
+			console.log(response);
+			console.log(status);
+		});
 	});
    </script>
   </body>
