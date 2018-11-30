@@ -90,7 +90,7 @@
     $( document ).ready(function() {
 		$('#nav').load('predone/navbar.html');
 	});
-	
+	var nextId = -1;
 	$('#myform').submit(function() {
 		var toSendForSteps = $("#step1").val();
 		for(var i = 2; i <= numSteps; i++){
@@ -106,7 +106,17 @@
 		//return false;
 	});
 	$( "#submitbutton" ).click(function() {
-	  $("#myform").submit();
+		var recipeResult;
+		$.getJSON(url, function( data ) {
+			recipeResult = data;
+		}).then(function(){
+			var numRecipes = recipeResult.length;
+			nextId = recipeResult[numRecipes - 1]['id'] + 1;
+		});
+		//$("#myform").submit();
+		$.post(
+			{ name : "Testing From Code" }
+		);
 	});
    </script>
   </body>
