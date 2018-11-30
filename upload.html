@@ -99,7 +99,7 @@
 		}
 		$("#step1").val(toSendForSteps);
 		var checkResult = !($("#privateCheck").is(":checked"));
-		alert("checkbox returns: " + checkResult);
+		$("#privateCheck").val(checkResult);
 		//$(this).append(newFormField);
 		event.preventDefault();
 		//return false;
