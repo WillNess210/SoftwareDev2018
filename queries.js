@@ -17,15 +17,16 @@ const pool = new Pool({
 
 const makeRecipe = function(req, res){
 	const {id, owner_id = 2, name, category = 5, public, steps} = req.body;
+	var toSend = "";
 	pool.query('insert into recipes values($1,$2,$3,$4,$5,$6)', [id, owner_id, name, category, public, steps], function(err, results){
-		console.log("err: " + err);
-		console.log("results: "  + results);
+		toSend += "err: " + err;
+		toSend += " results: " + results;
 		if(err){
 			throw err;
 		}
 	});
 	//res.status(200).send('Successfully added recipe');
-	res.status(200).send("Successfully added recipe: |" + id + "|" + owner_id + "|" + name + "|" + category + "|" + public + "|" + steps);
+	res.status(200).send(toSend + " Successfully added recipe: |" + id + "|" + owner_id + "|" + name + "|" + category + "|" + public + "|" + steps);
 };
 
 const getRecipe = function(req, res){
