@@ -85,7 +85,7 @@
 		var uid = getAllUrlParams().uid;
 		$( document ).ready(function() {
 			$('#nav').load('predone/navbar.html');
-			var url = "http://djibouti-recipe.herokuapp.com/api/users/" + uid;
+			var url = "https://djibouti-recipe.herokuapp.com/api/users/" + uid;
 			var result;
 			$.getJSON(url, function( data ) {
 				result = data;
@@ -100,7 +100,7 @@
 				$("#usernameholder").html(username);
 			});
 			
-			url = "http://djibouti-recipe.herokuapp.com/api/recipes/";
+			url = "https://djibouti-recipe.herokuapp.com/api/recipes/";
 			var recipeResult;
 			$.getJSON(url, function( data ) {
 				recipeResult = data;
