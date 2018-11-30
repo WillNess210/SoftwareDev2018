@@ -173,9 +173,9 @@ const editUserEmail = function(req, res){
 };
 
 const editUserPassword = function(req, res){
-	const {pwd} = req.body;
+	const {hash_pass} = req.body;
 	const editID = parseInt(req.params.id);
-	pool.query('update users set hash_pass = $1 where id = $2', [pwd, editID],function(err, results){
+	pool.query('update users set hash_pass = $1 where id = $2', [hash_pass, editID],function(err, results){
 		if (err) {
         	throw err;
       	}
