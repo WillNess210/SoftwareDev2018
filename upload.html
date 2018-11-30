@@ -90,7 +90,7 @@
     $( document ).ready(function() {
 		$('#nav').load('predone/navbar.html');
 	});
-	var nextId = -1;
+	/*
 	$('#myform').submit(function() {
 		var toSendForSteps = $("#step1").val();
 		for(var i = 2; i <= numSteps; i++){
@@ -104,8 +104,9 @@
 		//$(this).append(newFormField);
 		event.preventDefault();
 		//return false;
-	});
+	}); */
 	$( "#submitbutton" ).click(function() {
+		var nextId = -1;
 		var recipeResult;
 		var url = "http://djibouti-recipe.herokuapp.com/api/recipes";
 		$.getJSON(url, function( data ) {
