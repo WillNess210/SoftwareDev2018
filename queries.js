@@ -19,6 +19,7 @@ const makeRecipe = function(req, res){
 	const {id, owner_id = 2, name, category = 5, public, steps} = req.body;
 	pool.query('insert into recipes values($1,$2,$3,$4,$5,$6)', [id, owner_id, name, category, public, steps], function(err, results){
 		if(err){
+			console.log(err);
 			throw err;
 		}
 	});
