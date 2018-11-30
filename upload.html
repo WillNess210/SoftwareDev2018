@@ -107,6 +107,7 @@
 	});
 	$( "#submitbutton" ).click(function() {
 		var recipeResult;
+		var url = "http://djibouti-recipe.herokuapp.com/api/recipes";
 		$.getJSON(url, function( data ) {
 			recipeResult = data;
 		}).then(function(){
