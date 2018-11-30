@@ -126,8 +126,10 @@ app.get("/dashboard",function(req, res){
   	//Front end will need to be edited
   	//Refer to the stack overflow link: https://stackoverflow.com/questions/37991995/passing-a-variable-from-node-js-to-html
   	//we may need to use ejs
-    console.log(req.session.id);
-    res.sendFile(__dirname +"/profile.html");
+    res.send(req.session.id);
+
+
+    //res.sendFile(__dirname +"/profile.html");
   }
 });
 
