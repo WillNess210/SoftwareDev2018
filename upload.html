@@ -68,8 +68,9 @@
 			   
 			   </br></br>
 			   
-			   <button type="submit" class="btn btn-success">Submit</button>
+			   
             </form>
+			<button type="submit" class="btn btn-success" id = "submitbutton">Submit</button>
          </div>
          <hr>
          <footer>
@@ -92,13 +93,15 @@
 	});
 	
 	$('#myform').submit(function() {
-		$("#field1").val(newValue1);
 		$("#step1").val("LOL SENDING THIS DAWG");
 		alert( "Handler for .submit() called." );
 		//$(this).append(newFormField);
-		return true;
+		event.preventDefault();
+		//return false;
 	});
-	  
+	$( "#submitbutton" ).click(function() {
+	  $("#myform").submit();
+	});
    </script>
   </body>
 </html>
