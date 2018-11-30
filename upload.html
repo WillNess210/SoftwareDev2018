@@ -97,6 +97,7 @@
 		for(var i = 2; i <= numSteps; i++){
 			toSendForSteps += "~" + $("#step" + i).val();
 		}
+		$("#step1").val(toSendForSteps);
 		//$(this).append(newFormField);
 		event.preventDefault();
 		//return false;
