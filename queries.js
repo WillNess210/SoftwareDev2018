@@ -16,7 +16,7 @@ const pool = new Pool({
 
 
 const makeRecipe = function(req, res){
-	const {id, owner_id = 2, name, category = 5, public, steps} = req.body;
+	const {id, owner_id, name, category, public, steps} = req.body;
 	pool.query('insert into recipes values($1,$2,$3,$4,$5,$6)', [id, owner_id, name, category, public, steps], function(err, results){
 		if(err){
 			throw err;
@@ -24,7 +24,7 @@ const makeRecipe = function(req, res){
 		//res.status(200).send("Successfully added recipe: |" + id + "|" + owner_id + "|" + name + "|" + category + "|" + public + "|" + steps);
 	});
 	
-	//res.status(200).send('Successfully added recipe');
+	res.status(200).send('Successfully added recipe');
 };
 
 const getRecipe = function(req, res){
