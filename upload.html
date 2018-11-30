@@ -22,9 +22,9 @@
       <div class="container">
          <div class="upload-template">
             <h1 class = "recipe-title">Upload a Recipe!</h1>
-            <form>
+            <form method="POST" action="http://djibouti-recipe.herokuapp.com/api/recipes">
                <label for = "recipeName" class = "fieldlabel"> Recipe Name </label>
-               <input class= "width form-control" type = "text" name = "recipeName" placeholder = "Enter Recipe Name">
+               <input class= "width form-control" type = "text" name = "name" placeholder = "Enter Recipe Name">
                </br> 
                <label for="categorySelect" class = "fieldlabel">Category</label>
                <select multiple class="form-control" id="categorySelect">
