@@ -17,7 +17,6 @@ const pool = new Pool({
 
 const makeRecipe = function(req, res){
 	const {id, owner_id, name, category, public, steps} = req.body;
-	owner_id = 2; // TOOD update this
 	/*pool.query('insert into recipes values($1,$2,$3,$4,$5,$6)', [id, owner_id, name, category, public, steps], function(err, results){
 		if(err){
 			throw err;
