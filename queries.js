@@ -22,8 +22,8 @@ const makeRecipe = function(req, res){
 			throw err;
 		}
 	});
-	res.status(200).send('Successfully added recipe');
-	//res.status(200).send(id + " " + owner_id + " " + name + " " + category + " " + public + " " + steps);
+	//res.status(200).send('Successfully added recipe');
+	res.status(200).send("Successfully added recipe" + id + " " + owner_id + " " + name + " " + category + " " + public + " " + steps);
 };
 
 const getRecipe = function(req, res){
