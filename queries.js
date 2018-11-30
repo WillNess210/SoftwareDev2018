@@ -46,6 +46,16 @@ const getRecipeByID = function(req, res){
 	});
 };
 
+const getRecipeByUser = function(req, res){
+	const id = parseInt(req.params.id);
+	pool.query('select * from recipes where owner_id = $1', [id], function(err, results){
+		if(err){
+			throw err;
+		}
+		res.status(200).json(results.rows);
+	});
+};
+
 const editRecipeSteps = function(req, res){
 	const {steps} = req.body;
 	const editID = parseInt(req.params.id);
@@ -87,6 +97,7 @@ const getIngredientsByID = function(req, res){
 		res.status(200).json(results.rows);
 	});
 };
+
 
 const editIngredientName = function(req, res){
 	const {name} = req.body;
@@ -157,7 +168,18 @@ const editUserEmail = function(req, res){
 		if (err) {
         	throw err;
       	}
-      	res.status(200).send(`Ingredient with id ${editID} was successfully modified`);
+      	res.status(200).send(`User with id ${editID} was successfully modified`);
+	});
+};
+
+const editUserPassword = function(req, res){
+	const {pwd} = req.body;
+	const editID = parseInt(req.params.id);
+	pool.query('update users set hash_pass = $1 where id = $2', [email, editID],function(err, results){
+		if (err) {
+        	throw err;
+      	}
+      	res.status(200).send(`User with id ${editID} was successfully modified`);
 	});
 };
 
@@ -190,6 +212,7 @@ module.exports = {
 	deleteRecipe,
 	getIngredients,
 	getIngredientsByID,
+	getRecipeByUser,
 	editIngredientName,
 	editIngredientAmt,
 	addIngredient,
@@ -197,6 +220,7 @@ module.exports = {
 	addUser,
 	deleteUser,
 	editUserEmail,
+	editUserPassword,
 	getUsers,
 	getUsersByID
 };

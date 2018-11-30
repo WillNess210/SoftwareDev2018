@@ -62,6 +62,7 @@ app.get('/', (request, response) => {
 router.get('/recipes', db.getRecipe);
 router.post('/recipes', db.makeRecipe);
 router.get('/recipes/:id', db.getRecipeByID);
+router.get('/recipes/user/:id', db.getRecipeByUser);
 router.put('/recipes/:id', db.editRecipeSteps);
 router.delete('/recipes/:id', db.deleteRecipe);
 router.get('/ingredients', db.getIngredients);
@@ -72,7 +73,8 @@ router.post('/ingredients', db.addIngredient);
 router.delete('/ingredients/:id', db.deleteIngredient);
 router.post('/users', db.addUser);
 router.delete('/users/:id', db.deleteUser);
-router.put('/users/:id', db.editUserEmail);
+router.put('/users/email/:id', db.editUserEmail);
+router.put('/users/pwd/:id', db.editUserPassword);
 router.get('/users', db.getUsers);
 router.get('/users/:id', db.getUsersByID);
 
@@ -94,7 +96,7 @@ app.get("/upload", function(req, res){
 });
 
 app.get("/signin",function(req, res){
-  if(!req.session.user)
+  if(!req.session.id)
     res.sendFile(__dirname + "/login.html");
   else
     res.redirect("/dashboard");
@@ -105,17 +107,17 @@ app.post("/signin",function(req, res){
   const {username, password} = req.body;
   client.query('select * from users where email = $1 and hash_pass = $2', [username, password], function(err, results){
     if(err){
-    	res.send("Wrong password");
+    	res.send("Wrong password or no account");
     }
     else{
-      req.session.user = results;
+      req.session.id = results.id;
       res.redirect("/dashboard");
     }
   });
 });
 
 app.get("/dashboard",function(req, res){
-  if(!req.session.user){
+  if(!req.session.id){
     res.redirect("/signin");
   }
   else{
@@ -123,7 +125,7 @@ app.get("/dashboard",function(req, res){
   	//Front end will need to be edited
   	//Refer to the stack overflow link: https://stackoverflow.com/questions/37991995/passing-a-variable-from-node-js-to-html
   	//we may need to use ejs
-    res.send(req.session.user.rows);
+    res.send(req.session.id.rows);
     res.sendFile(__dirname +"/profile.html");
   }
 });
