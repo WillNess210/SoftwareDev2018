@@ -43,9 +43,10 @@ app.use(function(req, res, next) {
 });
 
 app.use(session({
-  secret: "change_this_later",
+  secret: "test_cookie",
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
+  cookie: {secure: true, maxAge: 24*60*60*1000}
 }));
 //use req.session, store user especially when it comes to dashboard
 
@@ -104,16 +105,16 @@ app.get("/signin",function(req, res){
 
 app.post("/signin",function(req, res){
   //query here
-  const {username, password} = req.body;
-  client.query('select * from users where email = $1 and hash_pass = $2', [username, password], function(err, results){
-    if(err){
-    	res.send("Wrong password or no account");
-    }
-    else{
-      req.session.id = results.id;
-      res.redirect("/dashboard");
-    }
-  });
+  //do sign in queries on front end, this is result when query is true
+  //get id (ajax post request to this)
+  //https://stackoverflow.com/questions/39037494/send-data-with-jquery-to-node-application
+  if(!req.session.id){
+    req.session.id = req.body.id;
+    res.redirect("/dashboard");
+  }
+  else{
+    res.redirect("/dashboard");
+  }
 });
 
 app.get("/dashboard",function(req, res){
@@ -125,8 +126,18 @@ app.get("/dashboard",function(req, res){
   	//Front end will need to be edited
   	//Refer to the stack overflow link: https://stackoverflow.com/questions/37991995/passing-a-variable-from-node-js-to-html
   	//we may need to use ejs
-    res.send(req.session.id.rows);
     res.sendFile(__dirname +"/profile.html");
+  }
+});
+
+app.post("/logout", function(req, res){
+  if(!req.session.id){
+    console.log("You're stpid you should've logged in first");
+  }
+  else{
+    req.session.destroy(function(err) {
+      res.redirect("/");
+    });
   }
 });
 
