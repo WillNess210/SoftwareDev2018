@@ -23,8 +23,8 @@
          <div class="upload-template">
             <h1 class = "recipe-title">Upload a Recipe!</h1>
             <form method="POST" id = "myform" action="http://djibouti-recipe.herokuapp.com/api/recipes">
-               <label for = "recipeName" class = "fieldlabel"> Recipe Name </label>
-               <input class= "width form-control" type = "text" name = "name" placeholder = "Enter Recipe Name">
+               <label for = "repname" class = "fieldlabel"> Recipe Name </label>
+               <input class= "width form-control" id = "repname" type = "text" name = "name" placeholder = "Enter Recipe Name">
                </br> 
                <label for="categorySelect" class = "fieldlabel">Category</label>
                <select multiple class="form-control" id="categorySelect" name = "category">
@@ -113,17 +113,28 @@
 		}).then(function(){
 			var numRecipes = recipeResult.length;
 			nextId = recipeResult[numRecipes - 1]['id'] + 1;
+			var repname = $("#repname").val();
+			var categoryval = $("#categorySelect").val();
+			var checkResult = !($("#privateCheck").is(":checked"));
+			var toSendForSteps = $("#step1").val();
+			for(var i = 2; i <= numSteps; i++){
+				toSendForSteps += "~" + $("#step" + i).val();
+			}
+			$.post("http://djibouti-recipe.herokuapp.com/api/recipes", //Required URL of the page on server
+			{ // Data Sending With Request To Server
+				id: nextId,
+				name:repname,
+				category:categoryval,
+				public: checkResult,
+				steps: toSendForSteps
+			},
+			function(response,status){ // Required Callback Function
+				console.log(response);
+				console.log(status);
+			});
 		});
 		//$("#myform").submit();
-		console.log("Trying to post");
-		$.post("http://djibouti-recipe.herokuapp.com/api/recipes", //Required URL of the page on server
-		{ // Data Sending With Request To Server
-			name:"testing from jquery"
-		},
-		function(response,status){ // Required Callback Function
-			console.log(response);
-			console.log(status);
-		});
+		
 	});
    </script>
   </body>
