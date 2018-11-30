@@ -97,7 +97,7 @@ app.get("/upload", function(req, res){
 });
 
 app.get("/signin",function(req, res){
-  if(!req.session.id)
+  if(!req.session.user_id)
     res.sendFile(__dirname + "/login.html");
   else
     res.redirect("/dashboard");
@@ -108,8 +108,8 @@ app.post("/signin",function(req, res){
   //do sign in queries on front end, this is result when query is true
   //get id (ajax post request to this)
   //https://stackoverflow.com/questions/39037494/send-data-with-jquery-to-node-application
-  if(!req.session.id){
-    req.session.id = req.body.id;
+  if(!req.session.user_id){
+    req.session.user_id = req.body.id;
     res.redirect("/dashboard");
   }
   else{
@@ -118,7 +118,7 @@ app.post("/signin",function(req, res){
 });
 
 app.get("/dashboard",function(req, res){
-  if(!req.session.id){
+  if(!req.session.user_id){
     res.redirect("/signin");
   }
   else{
@@ -126,7 +126,7 @@ app.get("/dashboard",function(req, res){
   	//Front end will need to be edited
   	//Refer to the stack overflow link: https://stackoverflow.com/questions/37991995/passing-a-variable-from-node-js-to-html
   	//we may need to use ejs
-    res.send(req.session.id);
+    res.send(req.session.user_id);
 
 
     //res.sendFile(__dirname +"/profile.html");
@@ -134,7 +134,7 @@ app.get("/dashboard",function(req, res){
 });
 
 app.post("/logout", function(req, res){
-  if(!req.session.id){
+  if(!req.session.user_id){
     console.log("You're stpid you should've logged in first");
   }
   else{
