@@ -93,8 +93,10 @@
 	});
 	
 	$('#myform').submit(function() {
-		$("#step1").val("LOL SENDING THIS DAWG");
-		alert( numSteps );
+		var toSendForSteps = $("#step1").val();
+		for(var i = 2; i <= numSteps; i++){
+			toSendForSteps += "~" + $("#step" + i).val();
+		}
 		//$(this).append(newFormField);
 		event.preventDefault();
 		//return false;
