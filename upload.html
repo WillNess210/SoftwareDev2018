@@ -98,7 +98,8 @@
 			toSendForSteps += "~" + $("#step" + i).val();
 		}
 		$("#step1").val(toSendForSteps);
-		alert($("#privateCheck").val());
+		var checkResult = $("#privateCheck").val();
+		alert("checkbox returns: " + checkResult);
 		//$(this).append(newFormField);
 		event.preventDefault();
 		//return false;
