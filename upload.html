@@ -65,7 +65,6 @@
 			   
                <label for="privateCheck" class = "fieldlabel">Recipe Private?</label>
                <input class="" type="checkbox" id="privateCheck" name = "public">
-			   
 			   </br></br>
 			   
 			   
@@ -100,6 +99,7 @@
 		$("#step1").val(toSendForSteps);
 		var checkResult = !($("#privateCheck").is(":checked"));
 		$("#privateCheck").val(checkResult);
+		alert(checkResult);
 		//$(this).append(newFormField);
 		event.preventDefault();
 		//return false;
