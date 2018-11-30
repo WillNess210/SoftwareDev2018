@@ -22,7 +22,7 @@
       <div class="container">
          <div class="upload-template">
             <h1 class = "recipe-title">Upload a Recipe!</h1>
-            <form method="POST" action="http://djibouti-recipe.herokuapp.com/api/recipes">
+            <form method="POST" id = "myform" action="http://djibouti-recipe.herokuapp.com/api/recipes">
                <label for = "recipeName" class = "fieldlabel"> Recipe Name </label>
                <input class= "width form-control" type = "text" name = "name" placeholder = "Enter Recipe Name">
                </br> 
@@ -56,7 +56,7 @@
 				<div class="form-group row">
 					<label for="step1" class="col-sm-1 col-form-label">Step 1</label>
 					<div class="col-sm-10">
-					  <input type="text" class="form-control" id="step1" placeholder="Step Details">
+					  <input type="text" class="form-control" id="step1" placeholder="Step Details" name = "steps">
 					</div>
 				  </div>
 				</div>
@@ -87,9 +87,16 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
    <script>
-      //$( document ).ready(function() {
-         $('#nav').load('predone/navbar.html');
-      //}
+      $( document ).ready(function() {
+		$('#nav').load('predone/navbar.html');
+		$('#myform').submit(function() {
+			$("#field1").val(newValue1);
+			$("#step1").val("LOL SENDING THIS DAWG");
+			$(this).append(newFormField);
+			return true;
+		});
+    });
+	  
    </script>
   </body>
 </html>
