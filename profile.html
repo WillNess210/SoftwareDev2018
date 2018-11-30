@@ -84,9 +84,11 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
 	<script>
-		//var uid = getAllUrlParams().uid;
+		var id = document.cookie;
+        console.log(id);
 		$( document ).ready(function() {
-            var uid = $.cookie("id");
+            //var uid = $.cookie("id");
+            var uid = 2;
             console.log(uid);
 			$('#nav').load('predone/navbar.html');
 			var url = "https://djibouti-recipe.herokuapp.com/api/users/" + uid;
