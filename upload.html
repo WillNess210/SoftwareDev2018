@@ -115,6 +115,7 @@
 			nextId = recipeResult[numRecipes - 1]['id'] + 1;
 		});
 		//$("#myform").submit();
+		console.log("Trying to post");
 		$.post(
 			"http://djibouti-recipe.herokuapp.com/api/recipes",
 			{ name : "Testing From Code" }
