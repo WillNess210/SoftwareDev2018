@@ -82,6 +82,7 @@ function addStepField(){
 	input.className = "form-control";
 	input.id = "step" + numSteps;
 	input.placeholder = "Step Details";
+	input.name = "steps";
 	row.appendChild(label);
 	divCol.appendChild(input);
 	row.appendChild(divCol);
