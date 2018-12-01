@@ -46,7 +46,7 @@ app.use(session({
   secret: "test_cookie",
   resave: false,
   saveUninitialized: true,
-  cookie: {secure: true, maxAge: 24*60*60*1000}
+  cookie: {secure: true, expires: false}
 }));
 //use req.session, store user especially when it comes to dashboard
 
@@ -111,6 +111,7 @@ app.post("/signin",function(req, res){
   if(!req.session.user_id){
     //req.session.user_id = req.body.id;
     req.session.user_id = 4;
+    console.log(req.session.user_id);
     res.redirect("/dashboard");
   }
   else{
@@ -136,7 +137,7 @@ app.get("/dashboard",function(req, res){
 
 app.post("/logout", function(req, res){
   if(!req.session.user_id){
-    console.log("You're stpid you should've logged in first");
+    console.log("You're stupid you should've logged in first");
   }
   else{
     req.session.destroy(function(err) {

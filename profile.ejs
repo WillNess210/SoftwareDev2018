@@ -88,10 +88,10 @@
 		var uid = <%= user_id %>
 		$( document ).ready(function() {
             //var uid = $.cookie("id");
-            var uid = 2;
+            //var uid = 2;
             console.log(uid);
 			$('#nav').load('predone/navbar.html');
-			var url = "https://djibouti-recipe.herokuapp.com/api/users/" + uid;
+			var url = "https://djibouti-recipe.herokuapp.com/api/users/" + uid.toString();
 			var result;
 			$.getJSON(url, function( data ) {
 				result = data;
