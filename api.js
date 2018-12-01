@@ -97,8 +97,12 @@ app.get("/upload", function(req, res){
 });
 
 app.get("/signin",function(req, res){
-  if(!req.session.user_id)
-    res.sendFile(__dirname + "/login.html");
+  if(!req.session.user_id){
+    //res.sendFile(__dirname + "/login.html");
+    req.session.user_id = 4;
+    console.log(req.session.user_id);
+    res.redirect("/dashboard");
+  }
   else
     res.redirect("/dashboard");
 });
@@ -110,9 +114,7 @@ app.post("/signin",function(req, res){
   //https://stackoverflow.com/questions/39037494/send-data-with-jquery-to-node-application
   if(!req.session.user_id){
     //req.session.user_id = req.body.id;
-    req.session.user_id = 4;
-    console.log(req.session.user_id);
-    res.redirect("/dashboard");
+    //res.redirect("/dashboard");
   }
   else{
     res.redirect("/dashboard");
