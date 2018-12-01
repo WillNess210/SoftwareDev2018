@@ -81,7 +81,7 @@ router.get('/users/:id', db.getUsersByID);
 
 app.use('/api', router);
 
-
+app.set('view engine', 'ejs');
 //Routing for all other pages
 
 app.get("/", function(req, res) {
@@ -126,8 +126,8 @@ app.get("/dashboard",function(req, res){
   	//Front end will need to be edited
   	//Refer to the stack overflow link: https://stackoverflow.com/questions/37991995/passing-a-variable-from-node-js-to-html
   	//we may need to use ejs
-    res.send(req.session.user_id);
-
+    
+    res.render('profile', {user_id: req.session.user_id});
 
     //res.sendFile(__dirname +"/profile.html");
   }
