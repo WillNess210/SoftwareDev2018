@@ -44,7 +44,7 @@ app.use(function(req, res, next) {
 
 app.set('trust proxy', 1) // trust first proxy
 
-app.use(cookieSession({
+app.use(session({
    name: 'userSession',
    keys: ['Somebody', 'Once', 'Told', 'Me'],
    maxAge: 24 * 60 * 60 * 1000 // 24 hours
