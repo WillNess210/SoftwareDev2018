@@ -46,7 +46,7 @@ app.use(session({
   secret: "test_cookie",
   resave: false,
   saveUninitialized: true,
-  cookie: {secure: true, expires: false}
+  cookie: {secure: true}
 }));
 //use req.session, store user especially when it comes to dashboard
 
