@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<script src="js/main.js"> </script>
+    <title>Profile</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/main.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <nav id = "nav">
+	
+	</nav>
+	
+    <div class="container">
+
+      <div class="starter-template">
+        <div class="profile-desc">
+            <div>
+                <h2 id = "maintitle"><div id = "usernameholder" style = "display:inline">username</div>'s Profile<br></h2>
+            </div>
+        </div>
+        <h3 id = "sectitle">Shared Recipes</h3>
+        <br>
+        <div class="row">
+
+
+
+        <div class="tab valid">
+          <button class="tablinks" onclick="openCity(event, 'Created')" id="defaultOpen">Created</button>
+        </div>
+
+        <div id="Created" class="tabcontent valid">
+            <div class="vertical-menu" id = "recipe-load">
+            </div>
+        </div>
+
+        </div>
+      </div>
+	<hr>
+
+      <footer>
+        <p>&copy; Let's Code Djibouti </p>
+      </footer>
+    </div><!-- /.container -->
+
+    <!-- Tab menu JS -->
+    <script>
+    function openCity(evt, cityName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+    </script>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+	<script src = "components/jquery/jquery-3.3.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"><\/script>')</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.0/js.cookie.js"></script>
+    https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.0/js.cookie.js
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+	<script>
+        //make this an ejs file
+		//var uid = <% user_id %>;
+		$( document ).ready(function() {
+            //var uid = $.cookie("id");
+            //var uid = 2;
+            console.log(uid);
+			$('#nav').load('predone/navbar.html');
+			var url = "https://djibouti-recipe.herokuapp.com/api/users/" + <%= user_id %>;
+			var result;
+			$.getJSON(url, function( data ) {
+				result = data;
+			}).then(function(){
+				if(result.length == 0){ // NO USER EXISTS
+					$("#maintitle").html("NO USER FOUND WITH ID " + uid);
+					$("#sectitle").html("<a href = \"index.html\"> Return Home </a>");
+					$(".valid").html("");
+					return;
+				}
+				var username = result['0'].username;
+				$("#usernameholder").html(username);
+			});
+			
+			url = "https://djibouti-recipe.herokuapp.com/api/recipes/";
+			var recipeResult;
+			$.getJSON(url, function( data ) {
+				recipeResult = data;
+			}).then(function(){
+				var numRecipes = recipeResult.length;
+				for(var i = 0; i < numRecipes; i++){
+					var ownerId = recipeResult[i]['owner_id'];
+					var recipeId = recipeResult[i]['id'];
+					var recipeName = recipeResult[i]['name'];
+					if(uid == ownerId){ // THIS RECIPE IS OWNED BY THE USER WE"RE LOOKING FOR
+						var text = "<a href = \"view_recipe.html?rid=" + recipeId + "\"> " + recipeName + " </a>";
+						//<a href="#">Recipe 2</a>
+						$("#recipe-load").append(text);
+					}
+				}
+			});
+		});
+	</script>
+  </body>
+</html>
