@@ -124,7 +124,7 @@ app.post("/signin",function(req, res){
 app.get("/dashboard",function(req, res){
   if(!req.session.user_id){
     //res.redirect("/signin");
-    res.render('profile', {user_id: 2});
+    res.render(__dirname + '/profile.ejs', {user_id: 2});
   }
   else{
   	//This part needs to be edited, as we cannot do 2 send calls
