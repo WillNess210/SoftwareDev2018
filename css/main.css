@@ -1,11 +1,22 @@
 body {
   padding-top: 5rem;
 }
+
+body, html {
+    height: 100%;
+}
+
+.jumbotron {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../banner.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+}
+
 .starter-template {
 	padding: 3rem 1.5rem;
 	text-align: center;
 }
-
 
 .upload-template{
 	padding: 3rem 1.5rem;
