@@ -109,7 +109,8 @@ app.post("/signin",function(req, res){
   //get id (ajax post request to this)
   //https://stackoverflow.com/questions/39037494/send-data-with-jquery-to-node-application
   if(!req.session.user_id){
-    req.session.user_id = req.body.id;
+    //req.session.user_id = req.body.id;
+    req.session.user_id = 4;
     res.redirect("/dashboard");
   }
   else{
