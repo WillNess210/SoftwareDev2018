@@ -85,13 +85,13 @@
     <script src="js/ie10-viewport-bug-workaround.js"></script>
 	<script>
         //make this an ejs file
-		var uid = <% user_id %>;
+		//var uid = <% user_id %>;
 		$( document ).ready(function() {
             //var uid = $.cookie("id");
             //var uid = 2;
             console.log(uid);
 			$('#nav').load('predone/navbar.html');
-			var url = "https://djibouti-recipe.herokuapp.com/api/users/" + uid.toString();
+			var url = "https://djibouti-recipe.herokuapp.com/api/users/" + <%= user_id %>;
 			var result;
 			$.getJSON(url, function( data ) {
 				result = data;
