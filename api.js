@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const app = express();
 //const port = 3000;
 const db = require('./queries')
-var session = require('express-session');
+var session = require('cookie-session');
 const Client = require('pg').Client;
 
 const client = new Client({
@@ -42,11 +42,12 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use(session({
-  secret: "test_cookie",
-  resave: false,
-  saveUninitialized: true,
-  cookie: {secure: true}
+app.set('trust proxy', 1) // trust first proxy
+
+app.use(cookieSession({
+   name: 'userSession',
+   keys: ['Somebody', 'Once', 'Told', 'Me'],
+   maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }));
 //use req.session, store user especially when it comes to dashboard
 
@@ -144,9 +145,8 @@ app.post("/logout", function(req, res){
     console.log("You're stupid you should've logged in first");
   }
   else{
-    req.session.destroy(function(err) {
-      res.redirect("/");
-    });
+    req.session = null;
+    res.redirect("/");
   }
 });
 
