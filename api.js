@@ -97,8 +97,12 @@ app.get("/upload", function(req, res){
 });
 
 app.get("/signin",function(req, res){
-  if(!req.session.user_id)
-    res.sendFile(__dirname + "/login.html");
+  if(!req.session.user_id){
+    //res.sendFile(__dirname + "/login.html");
+    req.session.user_id = 4;
+    console.log(req.session.user_id);
+    res.redirect("/dashboard");
+  }
   else
     res.redirect("/dashboard");
 });
@@ -110,9 +114,7 @@ app.post("/signin",function(req, res){
   //https://stackoverflow.com/questions/39037494/send-data-with-jquery-to-node-application
   if(!req.session.user_id){
     //req.session.user_id = req.body.id;
-    req.session.user_id = 4;
-    console.log(req.session.user_id);
-    res.redirect("/dashboard");
+    //res.redirect("/dashboard");
   }
   else{
     res.redirect("/dashboard");
@@ -121,14 +123,15 @@ app.post("/signin",function(req, res){
 
 app.get("/dashboard",function(req, res){
   if(!req.session.user_id){
-    res.redirect("/signin");
+    //res.redirect("/signin");
+    res.render(__dirname + '/profile.ejs', {user_id: 2});
   }
   else{
   	//This part needs to be edited, as we cannot do 2 send calls
   	//Front end will need to be edited
   	//Refer to the stack overflow link: https://stackoverflow.com/questions/37991995/passing-a-variable-from-node-js-to-html
   	//we may need to use ejs
-    
+    console.log(req.session.user_id);
     res.render('profile', {user_id: req.session.user_id});
 
     //res.sendFile(__dirname +"/profile.html");
