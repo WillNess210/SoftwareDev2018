@@ -134,8 +134,8 @@ app.get("/dashboard",function(req, res){
   	//Refer to the stack overflow link: https://stackoverflow.com/questions/37991995/passing-a-variable-from-node-js-to-html
   	//we may need to use ejs
     console.log("in dashboard - successful");
-    res.render(req.session.user_id);
-    //res.render('profile', {user_id: req.session.user_id});
+    //res.send(req.session.user_id);
+    res.render('profile', {user_id: req.session.user_id});
 
     //res.sendFile(__dirname +"/profile.html");
   }
