@@ -65,6 +65,7 @@ router.get('/recipes', db.getRecipe);
 router.post('/recipes', db.makeRecipe);
 router.get('/recipes/:id', db.getRecipeByID);
 router.get('/recipes/user/:id', db.getRecipeByUser);
+router.get('/recipes/user-public/:id', db.getPublicRecipeByUser);
 router.put('/recipes/:id', db.editRecipeSteps);
 router.delete('/recipes/:id', db.deleteRecipe);
 router.get('/ingredients', db.getIngredients);

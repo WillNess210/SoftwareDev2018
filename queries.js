@@ -56,6 +56,16 @@ const getRecipeByUser = function(req, res){
 	});
 };
 
+const getPublicRecipeByUser = function(req, res){
+	const id = parseInt(req.params.id);
+	pool.query('select * from recipes where owner_id = $1 and public = true', [id], function(err, results){
+		if(err){
+			throw err;
+		}
+		res.status(200).json(results.rows);
+	});
+};
+
 const editRecipeSteps = function(req, res){
 	const {steps} = req.body;
 	const editID = parseInt(req.params.id);
@@ -213,6 +223,7 @@ module.exports = {
 	getIngredients,
 	getIngredientsByID,
 	getRecipeByUser,
+	getPublicRecipeByUser,
 	editIngredientName,
 	editIngredientAmt,
 	addIngredient,
