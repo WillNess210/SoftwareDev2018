@@ -101,6 +101,8 @@ app.get("/upload", function(req, res){
 app.get("/signin",function(req, res){
   if(!req.session.user_id){
     //res.sendFile(__dirname + "/login.html");
+
+    //below here are tests, once login up, comment these, uncomment first line
     req.session.user_id = 2;
     console.log(req.session.user_id);
     res.redirect("/dashboard");
