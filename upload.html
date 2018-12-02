@@ -105,20 +105,6 @@
 		event.preventDefault();
 		//return false;
 	}); */
-               <label for = "ingredients" class = "fieldlabel"> Ingredients </label>
-			   <div id = "ingredients">
-				   <div class="row">
-					  <div class="col">
-						 <input type="text" class="form-control" placeholder="Ingredient 1 Name" id = "ing1name">
-					  </div>
-					  <div class="col">
-						 <input type="text" class="form-control" placeholder="Ingredient Amount (ex: 1 cup, 8 handfuls, etc..)" id = "ing1amt">
-					  </div>
-				   </div>
-			   </div>
-			   <input type="button" value="Add a field" class="addbutton btn btn-primary" id="add" onclick = "addIngredientField()"/>
-               </br> </br>
-
 	$( "#submitbutton" ).click(function() {
 		var nextId = -1;
 		var recipeResult;
@@ -151,7 +137,6 @@
 				console.log(status);
 			});
 		});
-		//$("#myform").submit();
 
                 // Ingredients input
 		var url = "http://djibouti-recipe.herokuapp.com/api/ingredients";
@@ -175,6 +160,7 @@
 
 			}
 		});
+		$("#myform").reset();
 
 	});
    </script>
