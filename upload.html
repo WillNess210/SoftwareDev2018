@@ -145,8 +145,8 @@
 		}).then(function(){
                         // For each ingredient, add the ingredient and amount as a new entry in table
 			for(var i = 1; i <= numIngredients; i++){
-				var toSendForIng = "~" + $("#ing" + i + "name").val();
-				var toSendForIngAmt = "~" + $("#ing" + i + "amt").val();
+				var toSendForIng = "~" + $("#inp" + i + "name").val();
+				var toSendForIngAmt = "~" + $("#inp" + i + "amt").val();
                                 $.post("http://djibouti-recipe.herokuapp.com/api/ingredients", //Required URL of the page on server
                                 { // Data Sending With Request To Server
                                         recipe_id: nextId,
