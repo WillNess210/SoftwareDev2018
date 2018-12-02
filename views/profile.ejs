@@ -106,7 +106,7 @@
 				$("#usernameholder").html(username);
 			});
 			
-			url = "https://djibouti-recipe.herokuapp.com/api/recipes/";
+			url = "https://djibouti-recipe.herokuapp.com/api/recipes/user-public/" + <%= user_id %>;
 			var recipeResult;
 			$.getJSON(url, function( data ) {
 				recipeResult = data;
@@ -116,11 +116,9 @@
 					var ownerId = recipeResult[i]['owner_id'];
 					var recipeId = recipeResult[i]['id'];
 					var recipeName = recipeResult[i]['name'];
-					if(uid == ownerId){ // THIS RECIPE IS OWNED BY THE USER WE"RE LOOKING FOR
-						var text = "<a href = \"view_recipe.html?rid=" + recipeId + "\"> " + recipeName + " </a>";
-						//<a href="#">Recipe 2</a>
-						$("#recipe-load").append(text);
-					}
+					var text = "<a href = \"view_recipe.html?rid=" + recipeId + "\"> " + recipeName + " </a>";
+                        //<a href="#">Recipe 2</a>
+                    $("#recipe-load").append(text);
 				}
 			});
 		});
