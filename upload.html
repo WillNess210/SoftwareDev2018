@@ -105,9 +105,25 @@
 		event.preventDefault();
 		//return false;
 	}); */
+               <label for = "ingredients" class = "fieldlabel"> Ingredients </label>
+			   <div id = "ingredients">
+				   <div class="row">
+					  <div class="col">
+						 <input type="text" class="form-control" placeholder="Ingredient 1 Name" id = "ing1name">
+					  </div>
+					  <div class="col">
+						 <input type="text" class="form-control" placeholder="Ingredient Amount (ex: 1 cup, 8 handfuls, etc..)" id = "ing1amt">
+					  </div>
+				   </div>
+			   </div>
+			   <input type="button" value="Add a field" class="addbutton btn btn-primary" id="add" onclick = "addIngredientField()"/>
+               </br> </br>
+
 	$( "#submitbutton" ).click(function() {
 		var nextId = -1;
 		var recipeResult;
+
+                // Recipes input
 		var url = "http://djibouti-recipe.herokuapp.com/api/recipes";
 		$.getJSON(url, function( data ) {
 			recipeResult = data;
@@ -126,7 +142,7 @@
                                 owner_id: 1,
 				id: nextId,
 				name: repname,
-				category:categoryval,
+				category: categoryval,
 				public: checkResult,
 				steps: toSendForSteps
 			},
@@ -136,7 +152,30 @@
 			});
 		});
 		//$("#myform").submit();
-		
+
+                // Ingredients input
+		var url = "http://djibouti-recipe.herokuapp.com/api/ingredients";
+		$.getJSON(url, function( data ) {
+			recipeResult = data;
+		}).then(function(){
+                        // For each ingredient, add the ingredient and amount as a new entry in table
+			for(var i = 1; i <= numIngredients; i++){
+				var toSendForIng = "~" + $("#ing" + i + "name").val();
+				var toSendForIngAmt = "~" + $("#ing" + i + "amt").val();
+                                $.post("http://djibouti-recipe.herokuapp.com/api/ingredients", //Required URL of the page on server
+                                { // Data Sending With Request To Server
+                                        recipe_id: nextId,
+                                        name: toSendForIng,
+                                        amount: toSendForIngAmt
+                                },
+                                function(response,status){ // Required Callback Function
+                                        console.log(response);
+                                        console.log(status);
+                                });
+
+			}
+		});
+
 	});
    </script>
   </body>
