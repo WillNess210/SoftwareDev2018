@@ -48,9 +48,9 @@
          	var username = $("#user").val();
          	var password = $("#password").val();
          	var id = "";
-         	$.getJSON("https://djibouti-recipe.herokuapp.com/api/users",function(data, status){
-         		if(status != 200)
-         			console.log("Connection error");
+         	var link = "https://djibouti-recipe.herokuapp.com/api/users";
+         	$.getJSON(link,{format: "json"}).done(function(data){
+         		console.log("Logging in");
          		else{
          			for(var i = 0; i < data.length; i++){
          				if(data[i].username === username){
@@ -64,8 +64,6 @@
          				}
          			}
          		}
-         	}).then(function(){
-         		console.log("Logging in");
          		$.post("https://djibouti-recipe.herokuapp.com/signin", {"id": id}, "json");
          	});
          });
