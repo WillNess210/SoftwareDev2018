@@ -109,10 +109,10 @@
 	$("#add").click(function() {
 		add_count = add_count + 1;
 		if (add_count == 10) {
-			document.getElementById("add").disabled = true;
+			$("#add").prop('disabled', true);
 		}
 		else {
-			document.getElementById("add").disabled = false;
+			$("#add").prop('disabled', false);
 		}
 	}
 	$( "#submitbutton" ).click(function() {
