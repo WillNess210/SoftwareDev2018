@@ -28,6 +28,8 @@
 		</script>
 		</p> -->
 		<a href = "#" class = "lead recipe-item valid btn btn-secondary" id = "usernameholder">By: (USERNAME)</a>
+		<input type="button" value="Copy Url" onclick="copyURL();" />
+		Paste: <textarea id="urlCopied" rows="1" cols="30"></textarea>
         <h1 class = "recipe-title" id = "recipe-title">Recipe Name Here</h1>
 		<p class="lead recipe-title" id = "recipe-category">(CATEGORY) </p>
 		<h2 class = "recipe-title valid"> Ingredients </h2>
@@ -59,6 +61,14 @@
 	var rid = getAllUrlParams().rid;
 	if(rid == undefined){
 		rid = 0;
+	}
+
+	function Copy() {
+	  var Url = document.getElementById("url");
+	  Url.innerHTML = window.location.href;
+	  console.log(Url.innerHTML)
+	  Url.select();
+	  document.execCommand("copy");
 	}
 	
 	$( document ).ready(function() {
