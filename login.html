@@ -56,13 +56,13 @@
          					console.log("Found User");
          					if(data[i].password === password){
    								var id = data[i].id;
+   								$.post("https://djibouti-recipe.herokuapp.com/signin", {"id": id}, "json");
          					}
          					else{
          						console.log("Wrong password");
          					}
          				}
          			}
-         		$.post("https://djibouti-recipe.herokuapp.com/signin", {"id": id}, "json");
          	});
          });
       });
