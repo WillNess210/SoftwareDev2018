@@ -47,6 +47,7 @@
          $("button").click(function(){
          	var username = $("#user").val();
          	var password = $("#password").val();
+         	var id = "";
          	$.getJSON("https://djibouti-recipe.herokuapp.com/api/users",function(data, status){
          		if(status != 200)
          			console.log("Connection error");
@@ -55,8 +56,7 @@
          				if(data[i].username === username){
          					console.log("Found User");
          					if(data[i].password === password){
-         						console.log("Found Combo");
-         						$.post("https://djibouti-recipe.herokuapp.com/signin", {"id": data[i].id}, "json");
+   								var id = data[i].id;
          					}
          					else{
          						console.log("Wrong password");
@@ -64,6 +64,9 @@
          				}
          			}
          		}
+         	}).then(function(){
+         		console.log("Logging in");
+         		$.post("https://djibouti-recipe.herokuapp.com/signin", {"id": id}, "json");
          	});
          });
       });
