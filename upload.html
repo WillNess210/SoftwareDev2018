@@ -105,6 +105,8 @@
 		event.preventDefault();
 		//return false;
 	}); */
+	
+	// Restrict add value button
 	var add_count = 1;
 	$("#add").click(function() {
 		add_count = add_count + 1;
@@ -114,7 +116,11 @@
 		else {
 			$("#add").prop('disabled', false);
 		}
-	}
+		function(response,status){ // Required Callback Function
+			console.log(response);
+			console.log(status);
+	});
+		
 	$( "#submitbutton" ).click(function() {
 		var nextId = -1;
 		var recipeResult;
