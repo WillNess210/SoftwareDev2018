@@ -122,6 +122,7 @@ app.post("/signin",function(req, res){
     req.session.user_id = parseInt(req.body.id);
     console.log("Redirecting");
     console.log(req.body);
+    console.log(req.session.user_id);
     res.redirect("/dashboard");
   }
   else{
