@@ -150,8 +150,8 @@
                                 $.post("http://djibouti-recipe.herokuapp.com/api/ingredients", //Required URL of the page on server
                                 { // Data Sending With Request To Server
                                         recipe_id: nextId,
-                                        name: toSendForIng,
-                                        amount: toSendForIngAmt
+                                        name: "cooltest" + i,
+                                        amount: "coolamt" + i
                                 },
                                 function(response,status){ // Required Callback Function
                                         console.log(response);
@@ -160,7 +160,6 @@
 
 			}
 		});
-		$("#myform").reset();
 
 	});
    </script>
