@@ -139,27 +139,27 @@
 		});
 
                 // Ingredients input
-		/*var url = "http://djibouti-recipe.herokuapp.com/api/ingredients";
-		$.getJSON(url, function( data ) {
-			recipeResult = data;
-		}).then(function(){
+	//	var url = "http://djibouti-recipe.herokuapp.com/api/ingredients";
+	//	$.getJSON(url, function( data ) {
+	//		recipeResult = data;
+	//	}).then(function(){
                         // For each ingredient, add the ingredient and amount as a new entry in table
-			for(var i = 1; i <= numIngredients; i++){
-				var toSendForIng = "~" + $("#inp" + i + "name").val();
-				var toSendForIngAmt = "~" + $("#inp" + i + "amt").val();
-                                $.post("http://djibouti-recipe.herokuapp.com/api/ingredients", //Required URL of the page on server
-                                { // Data Sending With Request To Server
-                                        recipe_id: nextId,
-                                        name: "cooltest" + i,
-                                        amount: "coolamt" + i
-                                },
-                                function(response,status){ // Required Callback Function
-                                        console.log(response);
-                                        console.log(status);
-                                });
-
-			}
-		});*/
+	//		for(var i = 1; i <= numIngredients; i++){
+	//			var toSendForIng = "~" + $("#inp" + i + "name").val();
+	//			var toSendForIngAmt = "~" + $("#inp" + i + "amt").val();
+ //                               $.post("http://djibouti-recipe.herokuapp.com/api/ingredients", //Required URL of the page on server
+ //                               { // Data Sending With Request To Server
+ //                                       recipe_id: nextId,
+ //                                       name: "cooltest" + i,
+ //                                       amount: "coolamt" + i
+ //                               },
+ //                               function(response,status){ // Required Callback Function
+ //                                       console.log(response);
+ //                                       console.log(status);
+ //                               });
+//
+	//		}
+	//	});
                 $.post("http://djibouti-recipe.herokuapp.com/api/ingredients", //Required URL of the page on server
                 { // Data Sending With Request To Server
                         recipe_id: nextId,
