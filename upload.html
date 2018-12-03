@@ -116,11 +116,11 @@
 		else {
 			$("#add").prop('disabled', false);
 		}
+		},
 		function(response,status){ // Required Callback Function
 			console.log(response);
 			console.log(status);
-		};
-	});
+		});
 		
 	$( "#submitbutton" ).click(function() {
 		var nextId = -1;
