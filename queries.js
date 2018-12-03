@@ -133,7 +133,7 @@ const editIngredientAmt = function(req, res){
 
 const addIngredient = function(req, res){
 	const {id, recipe_id, name, amount} = req.body;
-	pool.query('insert into ingredients values($1,$2,$3,$4)', [id, owner_id, name, amount], function(err, results){
+	pool.query('insert into ingredients values($1,$2,$3,$4)', [id, recipe_id, name, amount], function(err, results){
 		if(err){
 			throw err;
 		}
