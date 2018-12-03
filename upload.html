@@ -148,8 +148,8 @@
 			var numTotal = ingResult.length;
 			for(var i = 1; i <= numIngredients; i++){
                                 var ingId = ingResult[numTotal - 1]['id'] + i;
-				var toSendForIng = "~" + $("#inp" + i + "name").val();
-				var toSendForIngAmt = "~" + $("#inp" + i + "amt").val();
+				var toSendForIng = $("#inp" + i + "name").val();
+				var toSendForIngAmt = $("#inp" + i + "amt").val();
                                 $.post("http://djibouti-recipe.herokuapp.com/api/ingredients", //Required URL of the page on server
                                 { // Data Sending With Request To Server
                                         id: ingId,
