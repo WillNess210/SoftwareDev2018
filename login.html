@@ -19,15 +19,17 @@
       <nav id = "nav">
 	
 	</nav>
-	<form action="">
+	<form action="/signin" method = "POST">
 		<label for="uname"><b>Username</b></label>
-		<input type="text" class="form-control" placeholder="Enter Username" name="uname" required>
+		<input type="text" class="form-control" placeholder="Enter Username" name="uname" id="user" required>
 
 		<label for="psw"><b>Password</b></label>
-		<input type="password" class="form-control" placeholder="Enter Password" name="psw" required>
+		<input type="password" class="form-control" placeholder="Enter Password" name="psw" id="pass" required>
 		<br />
 		<button type="submit" class="btn btn-success">Login</button>
 	</form>
+
+
 
       <!-- /.container -->
       <!-- Bootstrap core JavaScript
@@ -40,9 +42,29 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
    <script>
-      //$( document ).ready(function() {
+      $( document ).ready(function() {
          $('#nav').load('predone/navbar.html');
-      //}
+         $("button").click(function(){
+         	var username = $("#user").val();
+         	var password = $("#password").val();
+         	$.getJSON("https://djibouti-recipe.herokuapp.com/api/users",function(data, status){
+         		if(status != 200)
+         			console.log("Connection error");
+         		else{
+         			for(var i = 0; i < data.length; i++){
+         				if(data[i].username === username){
+         					if(data[i].password === password){
+         						$.post();
+         					}
+         					else{
+         						console.log("Wrong password");
+         					}
+         				}
+         			}
+         		}
+         	});
+         });
+      }
    </script>
   </body>
 </html>

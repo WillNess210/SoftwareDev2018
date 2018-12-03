@@ -100,12 +100,14 @@ app.get("/upload", function(req, res){
 
 app.get("/signin",function(req, res){
   if(!req.session.user_id){
-    //res.sendFile(__dirname + "/login.html");
+    res.sendFile(__dirname + "/login.html");
 
     //below here are tests, once login up, comment these, uncomment first line
+    /*
     req.session.user_id = 2;
     console.log(req.session.user_id);
     res.redirect("/dashboard");
+    */
   }
   else
     res.redirect("/dashboard");
@@ -117,12 +119,13 @@ app.post("/signin",function(req, res){
   //get id (ajax post request to this)
   //https://stackoverflow.com/questions/39037494/send-data-with-jquery-to-node-application
   if(!req.session.user_id){
-    //req.session.user_id = req.body.id;
-    //res.redirect("/dashboard");
+    req.session.user_id = req.body.id;
+    res.redirect("/dashboard");
   }
   else{
     res.redirect("/dashboard");
   }
+
 });
 
 app.get("/dashboard",function(req, res){
@@ -144,7 +147,7 @@ app.get("/dashboard",function(req, res){
   }
 });
 
-app.post("/logout", function(req, res){
+app.get("/logout", function(req, res){
   if(!req.session.user_id){
     console.log("You're stupid you should've logged in first");
   }
