@@ -57,6 +57,7 @@
          					if(data[i].password === password){
    								var id = data[i].id;
    								$.post("https://djibouti-recipe.herokuapp.com/signin", {"id": id}, "json");
+   								window.location.replace('/dashboard');
          					}
          					else{
          						console.log("Wrong password");
