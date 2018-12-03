@@ -53,7 +53,9 @@
          		else{
          			for(var i = 0; i < data.length; i++){
          				if(data[i].username === username){
+         					console.log("Found User");
          					if(data[i].password === password){
+         						console.log("Found Combo");
          						$.post("https://djibouti-recipe.herokuapp.com/signin", {id: data[i].id}, "json");
          					}
          					else{
