@@ -105,14 +105,14 @@
 		event.preventDefault();
 		//return false;
 	}); */
-	var count = 1;
+	var add_count = 1;
 	$("#add").click(function() {
-		var count = count + 1;
-		if (count == 10) {
+		add_count = add_count + 1;
+		if (add_count == 10) {
 			document.getElementById("add").disabled = true;
 		}
 		else {
-			document.getElementById("Button").disabled = false;
+			document.getElementById("add").disabled = false;
 		}
 	}
 	$( "#submitbutton" ).click(function() {
