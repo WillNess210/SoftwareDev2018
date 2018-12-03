@@ -56,7 +56,7 @@
          					console.log("Found User");
          					if(data[i].password === password){
          						console.log("Found Combo");
-         						$.post("https://djibouti-recipe.herokuapp.com/signin", {id: data[i].id}, "json");
+         						$.post("https://djibouti-recipe.herokuapp.com/signin", {"id": data[i].id}, "json");
          					}
          					else{
          						console.log("Wrong password");
