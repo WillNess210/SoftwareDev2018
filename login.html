@@ -54,7 +54,7 @@
          			for(var i = 0; i < data.length; i++){
          				if(data[i].username === username){
          					if(data[i].password === password){
-         						$.post();
+         						$.post("https://djibouti-recipe.herokuapp.com/signin", {id: data[i].id}, "json");
          					}
          					else{
          						console.log("Wrong password");
