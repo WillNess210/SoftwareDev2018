@@ -139,7 +139,7 @@
 		});
 
                 // Ingredients input
-		var url = "http://djibouti-recipe.herokuapp.com/api/ingredients";
+		/*var url = "http://djibouti-recipe.herokuapp.com/api/ingredients";
 		$.getJSON(url, function( data ) {
 			recipeResult = data;
 		}).then(function(){
@@ -159,7 +159,17 @@
                                 });
 
 			}
-		});
+		});*/
+                $.post("http://djibouti-recipe.herokuapp.com/api/ingredients", //Required URL of the page on server
+                { // Data Sending With Request To Server
+                        recipe_id: nextId,
+                        name: "cooltest",
+                        amount: "coolamt"
+                },
+                function(response,status){ // Required Callback Function
+                        console.log(response);
+                        console.log(status);
+                });
 
 	});
    </script>
