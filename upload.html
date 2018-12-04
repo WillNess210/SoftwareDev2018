@@ -22,7 +22,7 @@
       <div class="container">
          <div class="upload-template">
             <h1 class = "recipe-title">Upload a Recipe!</h1>
-            <form method="POST" id = "myform" action="http://djibouti-recipe.herokuapp.com/api/recipes">
+            <form method="POST" id = "myform" action="https://djibouti-recipe.herokuapp.com/api/recipes">
                <label for = "repname" class = "fieldlabel"> Recipe Name </label>
                <input class= "width form-control" id = "repname" type = "text" name = "name" placeholder = "Enter Recipe Name" maxlength = "40">
                </br> 
@@ -128,7 +128,7 @@
 		var recipeResult;
 
                 // Recipes input
-		var url = "http://djibouti-recipe.herokuapp.com/api/recipes";
+		var url = "https://djibouti-recipe.herokuapp.com/api/recipes";
 		$.getJSON(url, function( data ) {
 			recipeResult = data;
 		}).then(function(){
@@ -141,7 +141,7 @@
 			for(var i = 2; i <= numSteps; i++){
 				toSendForSteps += "~" + $("#step" + i).val();
 			}
-			$.post("http://djibouti-recipe.herokuapp.com/api/recipes", //Required URL of the page on server
+			$.post("https://djibouti-recipe.herokuapp.com/api/recipes", //Required URL of the page on server
 			{ // Data Sending With Request To Server
                                 owner_id: 1,
 				id: nextId,
@@ -158,7 +158,7 @@
 
                 // Ingredients input
                 var ingResult;
-		var url = "http://djibouti-recipe.herokuapp.com/api/ingredients";
+		var url = "https://djibouti-recipe.herokuapp.com/api/ingredients";
 		$.getJSON(url, function( data ) {
 			ingResult = data;
 		}).then(function(){
@@ -168,7 +168,7 @@
                                 var ingId = ingResult[numTotal - 1]['id'] + i;
 				var toSendForIng = $("#inp" + i + "name").val();
 				var toSendForIngAmt = $("#inp" + i + "amt").val();
-                                $.post("http://djibouti-recipe.herokuapp.com/api/ingredients", //Required URL of the page on server
+                                $.post("https://djibouti-recipe.herokuapp.com/api/ingredients", //Required URL of the page on server
                                 { // Data Sending With Request To Server
                                         id: ingId,
                                         recipe_id: nextId,
