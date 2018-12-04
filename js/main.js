@@ -69,26 +69,28 @@ function addIngredientField(){
 
 var numSteps = 1;
 function addStepField(){
-	numSteps++;
-	var container = document.getElementById("steps");
-	var hr = document.createElement("hr");
-	container.appendChild(hr);
-	var row = document.createElement("div");
-	row.className = "form-group row";
-	var label = document.createElement("label");
-	label.for = "step" + numSteps;
-	label.className = "col-sm-1 col-form-label";
-	label.textContent = "Step " + numSteps;
-	var divCol = document.createElement("div");
-	divCol.className = "col-sm-10";
-	var input = document.createElement("input");
-	input.type = "text";
-	input.className = "form-control";
-	input.id = "step" + numSteps;
-	input.placeholder = "Step Details";
-	input.maxlength = "140";
-	row.appendChild(label);
-	divCol.appendChild(input);
-	row.appendChild(divCol);
-	container.appendChild(row);
+	if(numSteps < 10){
+		numSteps++;
+		var container = document.getElementById("steps");
+		var hr = document.createElement("hr");
+		container.appendChild(hr);
+		var row = document.createElement("div");
+		row.className = "form-group row";
+		var label = document.createElement("label");
+		label.for = "step" + numSteps;
+		label.className = "col-sm-1 col-form-label";
+		label.textContent = "Step " + numSteps;
+		var divCol = document.createElement("div");
+		divCol.className = "col-sm-10";
+		var input = document.createElement("input");
+		input.type = "text";
+		input.className = "form-control";
+		input.id = "step" + numSteps;
+		input.placeholder = "Step Details";
+		input.maxlength = "140";
+		row.appendChild(label);
+		divCol.appendChild(input);
+		row.appendChild(divCol);
+		container.appendChild(row);
+	}
 }
