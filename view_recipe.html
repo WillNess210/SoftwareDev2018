@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 	<script src="js/main.js"> </script>
-    <title>View Recipe</title>
+    <title id="recipe-title">View Recipe</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -14,6 +14,16 @@
   </head>
 
   <body>
+
+  	<!-- For the Facebook share button -->
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2';
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
 
     <nav id = "nav">
 	
@@ -40,7 +50,7 @@
 		<div id = "steps">
 		</div>
 		<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-		<a href="https://www.facebook.com/sharer/sharer.php?u=http://djibouti-recipe.herokuapp.com/view_recipe.html?rid=40" target="_blank">Share on Facebook</a>
+		<a id="fbButton" href="https://www.facebook.com/sharer/sharer.php?u=http://djibouti-recipe.herokuapp.com/view_recipe.html?rid=40" target="_blank">Share on Facebook</a>
       </div>
 	<hr>
 
@@ -66,6 +76,7 @@
 		rid = 0;
 	}
 
+	//attempting to copy the url with this funciton
 	function Copy() {
 	  var Url = document.getElementById("url");
 	  Url.innerHTML = window.location.href;
@@ -76,6 +87,7 @@
 	
 	$( document ).ready(function() {
 		$('#nav').load('predone/navbar.html');
+		$('#fbButton').attr("href", "https://www.facebook.com/sharer/sharer.php?u=" + window.location.href);
 		var userId = -1;
 		// LOADING IN RECIPE \\
 		var url = "http://djibouti-recipe.herokuapp.com/api/recipes/" + rid;
