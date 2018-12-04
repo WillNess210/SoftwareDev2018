@@ -36,33 +36,35 @@ function getAllUrlParams(url) {
 }
 var numIngredients = 1;
 function addIngredientField(){
-	numIngredients++;;
-	var container = document.getElementById("ingredients");
-	var hr = document.createElement("hr");
-	container.appendChild(hr);
-	var row = document.createElement("div");
-	row.className = "row addform";
-	var col1 = document.createElement("div");
-	col1.className = "col";
-	var inp1 = document.createElement("input");
-	inp1.type = "text";
-	inp1.className = "form-control";
-	inp1.placeholder = "Ingredient " + numIngredients + " Name";
-	inp1.id = "inp" + numIngredients + "name";
-	inp1.maxlength = "40";
-	col1.appendChild(inp1);
-	var col2 = document.createElement("div");
-	col2.className = "col";
-	var inp2 = document.createElement("input");
-	inp2.type = "text";
-	inp2.className = "form-control";
-	inp2.placeholder = "Ingredient Amount (ex: 1 cup, 8 handfuls, etc..)";
-	inp2.maxlength = "40";
-	inp2.id = "inp" + numIngredients + "amt";
-	col2.appendChild(inp2);
-	row.appendChild(col1);
-	row.appendChild(col2);
-	container.appendChild(row);
+	if(numIngredients < 10){
+		numIngredients++;;
+		var container = document.getElementById("ingredients");
+		var hr = document.createElement("hr");
+		container.appendChild(hr);
+		var row = document.createElement("div");
+		row.className = "row addform";
+		var col1 = document.createElement("div");
+		col1.className = "col";
+		var inp1 = document.createElement("input");
+		inp1.type = "text";
+		inp1.className = "form-control";
+		inp1.placeholder = "Ingredient " + numIngredients + " Name";
+		inp1.id = "inp" + numIngredients + "name";
+		inp1.maxlength = "40";
+		col1.appendChild(inp1);
+		var col2 = document.createElement("div");
+		col2.className = "col";
+		var inp2 = document.createElement("input");
+		inp2.type = "text";
+		inp2.className = "form-control";
+		inp2.placeholder = "Ingredient Amount (ex: 1 cup, 8 handfuls, etc..)";
+		inp2.maxlength = "40";
+		inp2.id = "inp" + numIngredients + "amt";
+		col2.appendChild(inp2);
+		row.appendChild(col1);
+		row.appendChild(col2);
+		container.appendChild(row);
+	}
 }
 
 var numSteps = 1;
