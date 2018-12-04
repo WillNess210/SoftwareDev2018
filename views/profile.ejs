@@ -114,7 +114,12 @@
 					var ownerId = recipeResult[i]['owner_id'];
 					var recipeId = recipeResult[i]['id'];
 					var recipeName = recipeResult[i]['name'];
-					var text = "<a href = \"view_recipe.html?rid=" + recipeId + "\"> " + recipeName + " </a>";
+					var recipePublic = recipeResult[i]['public'];
+					if(recipePublic){
+						var text = "<a href = \"view_recipe.html?rid=" + recipeId + "\"> " + recipeName + " </a>";
+					}else{
+						var text = "<a style = \"background-color: red;\" href = \"view_recipe.html?rid=" + recipeId + "\"> " + recipeName + " </a>";
+					}
                         //<a href="#">Recipe 2</a>
                     $("#recipe-load").append(text);
 				}
