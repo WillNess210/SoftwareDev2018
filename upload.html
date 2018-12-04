@@ -109,10 +109,10 @@
 	// Restrict add value button
 	$("#add").click(function() {
 		if (numIngredients == 10) {
-			$("#add").prop('disabled', true);
+			$("#add").attr('disabled', 'disabled');
 		}
 		else {
-			$("#add").prop('disabled', false);
+			$("#add").removeAttr('disabled');
 		}
 		},
 		function(response,status){ // Required Callback Function
