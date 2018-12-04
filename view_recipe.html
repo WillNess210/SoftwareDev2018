@@ -50,7 +50,7 @@
 		<div id = "steps">
 		</div>
 		<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-		<a href="https://www.facebook.com/sharer/sharer.php?u=http://djibouti-recipe.herokuapp.com/view_recipe.html?rid=40" target="_blank">Share on Facebook</a>
+		<a id="fbButton" href="https://www.facebook.com/sharer/sharer.php?u=http://djibouti-recipe.herokuapp.com/view_recipe.html?rid=40" target="_blank">Share on Facebook</a>
       </div>
 	<hr>
 
@@ -87,6 +87,7 @@
 	
 	$( document ).ready(function() {
 		$('#nav').load('predone/navbar.html');
+		$('#fbButton').attr("href", "https://www.facebook.com/sharer/sharer.php?u=" + window.location.href);
 		var userId = -1;
 		// LOADING IN RECIPE \\
 		var url = "http://djibouti-recipe.herokuapp.com/api/recipes/" + rid;
