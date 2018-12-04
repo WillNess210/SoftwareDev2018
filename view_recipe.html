@@ -124,7 +124,7 @@
 			$("#recipe-category").html(cat);
 			userId = JSONSTRING.owner_id;
 			// LOADING IN USERNAME \\
-			url = "http://djibouti-recipe.herokuapp.com/api/users/" + userId;
+			url = "https://djibouti-recipe.herokuapp.com/api/users/" + userId;
 			var userString = "";
 			$.getJSON(url, function( data ) {
 				userString = data;
@@ -140,7 +140,7 @@
 		});
 		
 		// LOADING IN INGREDIENTS \\
-		url = "http://djibouti-recipe.herokuapp.com/api/ingredients";
+		url = "https://djibouti-recipe.herokuapp.com/api/ingredients";
 		var ingString = "";
 		$.getJSON(url, function( data ) {
 			ingString = data;
