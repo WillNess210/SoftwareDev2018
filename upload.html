@@ -105,20 +105,7 @@
 		event.preventDefault();
 		//return false;
 	}); */
-	
-	// Restrict add value button
-	$("#add").click(function() {
-		if (numIngredients == 10) {
-			$("#add").attr('disabled', 'disabled');
-		}
-		else {
-			$("#add").removeAttr('disabled');
-		}
-		},
-		function(response,status){ // Required Callback Function
-			console.log(response);
-			console.log(status);
-		});
+	   
 	/* Submit not clickable until all text fields are filled in
 	while(){
 	     
@@ -143,8 +130,7 @@
 			}
 			$.post("https://djibouti-recipe.herokuapp.com/api/recipes", //Required URL of the page on server
 			{ // Data Sending With Request To Server
-                                owner_id: 1,
-				id: nextId,
+				owner_id: 17, // Change the owner_id ////////////////////////////////////////////////////////
 				name: repname,
 				category: categoryval,
 				public: checkResult,
@@ -170,7 +156,6 @@
 				var toSendForIngAmt = $("#inp" + i + "amt").val();
                                 $.post("https://djibouti-recipe.herokuapp.com/api/ingredients", //Required URL of the page on server
                                 { // Data Sending With Request To Server
-                                        id: ingId,
                                         recipe_id: nextId,
                                         name: toSendForIng,
                                         amount: toSendForIngAmt
