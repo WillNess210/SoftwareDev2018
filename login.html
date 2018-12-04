@@ -61,8 +61,8 @@
          					console.log("Found User");
          					found = true;
          					//do hashing here: https://stackoverflow.com/questions/18585159/how-to-convert-password-into-md5-in-jquery
-         					$("#error2").text(CryptoJS.MD5(password));
-         					if(data[i].password === CryptoJS.MD5(password)){
+         					//$("#error2").text(CryptoJS.MD5(password));
+         					if(data[i].password === password){
    								var id = data[i].id;
    								$.post("https://djibouti-recipe.herokuapp.com/signin", {"id": id}, "json").done(function(){window.location.replace('/dashboard');});
    								break;
