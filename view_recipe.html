@@ -90,7 +90,7 @@
 		$('#fbButton').attr("href", "https://www.facebook.com/sharer/sharer.php?u=" + window.location.href);
 		var userId = -1;
 		// LOADING IN RECIPE \\
-		var url = "http://djibouti-recipe.herokuapp.com/api/recipes/" + rid;
+		var url = "https://djibouti-recipe.herokuapp.com/api/recipes/" + rid;
 		$.getJSON(url, function( data ) {
 			JsonString = data;
 		}).then(function(){
