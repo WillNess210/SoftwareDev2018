@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 	<script src="js/main.js"> </script>
-    <title id="usernameholder">Profile</title>
+    <title class="usernameholder">Profile</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -26,7 +26,7 @@
       <div class="starter-template">
         <div class="profile-desc">
             <div>
-                <h2 id = "maintitle"><div id = "usernameholder" style = "display:inline">username</div>'s Profile<br></h2>
+                <h2 id = "maintitle"><div class = "usernameholder" style = "display:inline">username</div>'s Profile<br></h2>
             </div>
         </div>
         <h3 id = "sectitle">Shared Recipes</h3>
@@ -80,17 +80,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.0/js.cookie.js"></script>
-    https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.0/js.cookie.js
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
 	<script>
-        //make this an ejs file
-		var id = document.cookie;
-        console.log(id);
 		$( document ).ready(function() {
-            //var uid = $.cookie("id");
-            var uid = 2;
-            console.log(uid);
+            var uid =  getAllUrlParams().uid;
+            console.log("uid: " + uid);
 			$('#nav').load('predone/navbar.html');
 			var url = "https://djibouti-recipe.herokuapp.com/api/users/" + uid;
 			var result;
@@ -104,7 +99,7 @@
 					return;
 				}
 				var username = result['0'].username;
-				$("#usernameholder").html(username);
+				$(".usernameholder").html(username);
 			});
 			
 			url = "https://djibouti-recipe.herokuapp.com/api/recipes/";
