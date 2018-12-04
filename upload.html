@@ -107,10 +107,8 @@
 	}); */
 	
 	// Restrict add value button
-	var add_count = 1;
 	$("#add").click(function() {
-		add_count = add_count + 1;
-		if (add_count == 10) {
+		if (numIngredients == 10) {
 			$("#add").prop('disabled', true);
 		}
 		else {
@@ -121,7 +119,10 @@
 			console.log(response);
 			console.log(status);
 		});
-		
+	/* Submit not clickable until all text fields are filled in
+	while(){
+	     
+	}*/
 	$( "#submitbutton" ).click(function() {
 		var nextId = -1;
 		var recipeResult;
