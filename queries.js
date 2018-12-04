@@ -17,7 +17,7 @@ const pool = new Pool({
 
 const makeRecipe = function(req, res){
 	const {id, owner_id, name, category, public, steps} = req.body;
-	pool.query('insert into recipes values($1,$2,$3,$4,$5,$6)', [id, owner_id, name, category, public, steps], function(err, results){
+	pool.query('insert into recipes (owner_id, name, category, public, steps) values($1,$2,$3,$4,$5)', [owner_id, name, category, public, steps], function(err, results){
 		if(err){
 			throw err;
 		}
@@ -133,7 +133,7 @@ const editIngredientAmt = function(req, res){
 
 const addIngredient = function(req, res){
 	const {id, recipe_id, name, amount} = req.body;
-	pool.query('insert into ingredients values($1,$2,$3,$4)', [id, recipe_id, name, amount], function(err, results){
+	pool.query('insert into ingredients (recipe_id, name, amount)values($1,$2,$3)', [recipe_id, name, amount], function(err, results){
 		if(err){
 			throw err;
 		}
@@ -153,7 +153,7 @@ const deleteIngredient = function(req, res){
 
 const addUser = function(req, res){
 	const {id, username, email, hash_pass} = req.body;
-	pool.query('insert into users values($1,$2,$3,$4)', [id, username, email, hash_pass], function(err, results){
+	pool.query('insert into users (username, email, hash_pass) values($1,$2,$3)', [username, email, hash_pass], function(err, results){
 		if(err){
 			throw err;
 		}
