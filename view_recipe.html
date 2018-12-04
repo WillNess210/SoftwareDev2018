@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 	<script src="js/main.js"> </script>
-    <title id="recipe-title">View Recipe</title>
+    <title class="recipe-title">View Recipe</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -96,9 +96,11 @@
 		}).then(function(){
 			console.log("DATA STRING LENGTH: " + JsonString.length)
 			if(JsonString.length == 0){ // NO RECIPE EXISTS
-				$("#recipe-title").html("NO RECIPE FOUND WITH ID " + rid);
+				console.log("No recipe found");
+				$(".recipe-title").html("NO RECIPE FOUND WITH ID " + rid);
 				$("#recipe-category").html("<a href = \"index.html\"> Return Home </a>");
 				$(".valid").html("");
+				$(".valid").css('visibility', 'hidden');
 				return;
 			}
 			var JSONSTRING = JsonString['0'];
