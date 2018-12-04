@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 	<script src="js/main.js"> </script>
-    <title class="usernameholder">Profile</title>
+    <title id="usernameholder-title">Profile</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -26,7 +26,7 @@
       <div class="starter-template">
         <div class="profile-desc">
             <div>
-                <h2 id = "maintitle"><div class = "usernameholder" style = "display:inline">username</div>'s Profile<br></h2>
+                <h2 id = "maintitle"><div id = "usernameholder" style = "display:inline">username</div>'s Profile<br></h2>
             </div>
         </div>
         <h3 id = "sectitle">Shared Recipes</h3>
@@ -99,7 +99,8 @@
 					return;
 				}
 				var username = result['0'].username;
-				$(".usernameholder").html(username);
+				$("#usernameholder").html(username);
+				$("#usernameholder-title").html(username + "'s profile");
 			});
 			
 			url = "https://djibouti-recipe.herokuapp.com/api/recipes/";
