@@ -68,9 +68,11 @@ function addIngredientField(){
 }
 
 function removeIngredientField(){
-	document.getElementById("Ingredient "+numIngredients+" Name").remove();
-	document.getElementById("inp"+numIngredients+"name").remove();
-	numIngredients--;
+	/*if(numIngredients > 1){
+		document.getElementById("Ingredient "+numIngredients+" Name").remove();
+		document.getElementById("inp"+numIngredients+"name").remove();
+		numIngredients--;
+	}*/
 }
 
 var numSteps = 1;
@@ -102,6 +104,8 @@ function addStepField(){
 }
 
 function removeStepField(){
-	document.getElementById("step "+numSteps).remove();
-	numSteps--;
+	/*if(numSteps > 1){
+		document.getElementById("step "+numSteps).remove();
+		numSteps--;
+	}*/
 }
