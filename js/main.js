@@ -94,7 +94,3 @@ function addStepField(){
 		container.appendChild(row);
 	}
 }
-/*
-function checkInputs(){
-	for(var i = 0; i < 
-}*/
