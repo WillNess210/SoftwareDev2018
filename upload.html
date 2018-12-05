@@ -115,17 +115,30 @@
 	}*/
 
 	$( "#submitbutton" ).click(function() {
+		//check if inputs are filled
 		var filled = 1;
+		var tilda_flag = 0;
 		var inputs = document.getElementsByTagName('input');
 		for(var i = 0; i < inputs.length; i++){
 			if(inputs[i].value == ''){
-				alert('Fill all input fields!');
 				filled = 0;
+				alert('Fill all input fields!');
 				break;
 			}
 			filled = 1;
 		}
-		if(filled == 1){
+		//check if tilda is present in steps field
+		for(var i = 0; i < numSteps; i++){
+			var steps = document.getElementByID('step'+(i+1));
+			for(var j = 0; j < steps.length; j++){
+				if(steps[j] == '~'){
+					tilda_flag = 1;
+					alert('No tildas are allowed in the steps field');
+					break;
+				}
+			}
+		}
+		if(filled == 1 && tilda_flag == 0){
 			var nextId = -1;
 			var recipeResult;
 
