@@ -129,7 +129,7 @@
 		}
 		//check if tilda is present in steps field
 		for(var i = 0; i < numSteps; i++){
-			var steps = document.getElementByID('step'+(i+1));
+			var steps = document.getElementById('step'+(i+1));
 			for(var j = 0; j < steps.length; j++){
 				if(steps[j] == '~'){
 					tilda_flag = 1;
