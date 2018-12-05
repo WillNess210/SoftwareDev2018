@@ -37,7 +37,7 @@ function getAllUrlParams(url) {
 var numIngredients = 1;
 function addIngredientField(){
 	if(numIngredients < 10){
-		numIngredients++;;
+		numIngredients++;
 		var container = document.getElementById("ingredients");
 		var hr = document.createElement("hr");
 		container.appendChild(hr);
@@ -67,6 +67,12 @@ function addIngredientField(){
 	}
 }
 
+function removeIngredientField(){
+	document.getElementById("Ingredient "+numIngredients+" Name").remove();
+	document.getElementById("inp"+numIngredients+"name").remove();
+	numIngredients--;
+}
+
 var numSteps = 1;
 function addStepField(){
 	if(numSteps < 10){
@@ -93,4 +99,9 @@ function addStepField(){
 		row.appendChild(divCol);
 		container.appendChild(row);
 	}
+}
+
+function removeStepField(){
+	document.getElementById("step "+numSteps).remove();
+	numSteps--;
 }
