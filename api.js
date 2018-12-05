@@ -96,8 +96,9 @@ app.get("/secret/page/", function(req, res) {
 
 app.get("/upload", function(req, res){
 	if(!req.session.user_id)
-		res.redirect("/");
-	res.sendFile(__dirname + "/upload.html");
+		res.redirect("/signin");
+	else
+		res.sendFile(__dirname + "/upload.html");
 });
 
 app.get("/signin",function(req, res){
