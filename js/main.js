@@ -94,9 +94,7 @@ function addStepField(){
 		container.appendChild(row);
 	}
 }
-
-/*function removeIngredientField(){
-	if(numIngredients > 1){
-			
-	}
+/*
+function checkInputs(){
+	for(var i = 0; i < 
 }*/
