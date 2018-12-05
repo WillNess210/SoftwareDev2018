@@ -110,66 +110,78 @@
 	while(){
 	     
 	}*/
+
 	$( "#submitbutton" ).click(function() {
-		var nextId = -1;
-		var recipeResult;
-
-		// Check inputs for '~'
-		if(
-		
-		
-                // Recipes input
-		var url = "https://djibouti-recipe.herokuapp.com/api/recipes";
-		$.getJSON(url, function( data ) {
-			recipeResult = data;
-		}).then(function(){
-			var numRecipes = recipeResult.length;
-			nextId = recipeResult[numRecipes - 1]['id'] + 1;
-			var repname = $("#repname").val();
-			var categoryval = $("#categorySelect").val();
-			var checkResult = !($("#privateCheck").is(":checked"));
-			var toSendForSteps = $("#step1").val();
-			for(var i = 2; i <= numSteps; i++){
-				toSendForSteps += "~" + $("#step" + i).val();
+		var filled = 1;
+		var inputs = document.getElementsByTagName('input');
+		for(var int i = 0; i < inputs.length; i++){
+			if(inputs[i].value == ''){
+				alert('Fill all input fields!');
+				filled = 0;
+				break;
 			}
-			$.post("https://djibouti-recipe.herokuapp.com/api/recipes", //Required URL of the page on server
-			{ // Data Sending With Request To Server
-				owner_id: 17, // Change the owner_id ////////////////////////////////////////////////////////
-				name: repname,
-				category: categoryval,
-				public: checkResult,
-				steps: toSendForSteps
-			},
-			function(response,status){ // Required Callback Function
-				console.log(response);
-				console.log(status);
+			filled = 1;
+		}
+		if(filled == 1){
+			var nextId = -1;
+			var recipeResult;
+
+			// Check inputs for '~'
+			if(
+
+
+			// Recipes input
+			var url = "https://djibouti-recipe.herokuapp.com/api/recipes";
+			$.getJSON(url, function( data ) {
+				recipeResult = data;
+			}).then(function(){
+				var numRecipes = recipeResult.length;
+				nextId = recipeResult[numRecipes - 1]['id'] + 1;
+				var repname = $("#repname").val();
+				var categoryval = $("#categorySelect").val();
+				var checkResult = !($("#privateCheck").is(":checked"));
+				var toSendForSteps = $("#step1").val();
+				for(var i = 2; i <= numSteps; i++){
+					toSendForSteps += "~" + $("#step" + i).val();
+				}
+				$.post("https://djibouti-recipe.herokuapp.com/api/recipes", //Required URL of the page on server
+				{ // Data Sending With Request To Server
+					owner_id: 17, // Change the owner_id ////////////////////////////////////////////////////////
+					name: repname,
+					category: categoryval,
+					public: checkResult,
+					steps: toSendForSteps
+				},
+				function(response,status){ // Required Callback Function
+					console.log(response);
+					console.log(status);
+				});
 			});
-		});
 
-                // Ingredients input
-                var ingResult;
-		var url = "https://djibouti-recipe.herokuapp.com/api/ingredients";
-		$.getJSON(url, function( data ) {
-			ingResult = data;
-		}).then(function(){
-                        // For each ingredient, add the ingredient and amount as a new entry in table
-			var numTotal = ingResult.length;
-			for(var i = 1; i <= numIngredients; i++){
-                                var ingId = ingResult[numTotal - 1]['id'] + i;
-				var toSendForIng = $("#inp" + i + "name").val();
-				var toSendForIngAmt = $("#inp" + i + "amt").val();
-                                $.post("https://djibouti-recipe.herokuapp.com/api/ingredients", //Required URL of the page on server
-                                { // Data Sending With Request To Server
-                                        recipe_id: nextId,
-                                        name: toSendForIng,
-                                        amount: toSendForIngAmt
-                                },
-                                function(response,status){ // Required Callback Function
-                                        console.log(response);
-                                        console.log(status);
-                                });
+			// Ingredients input
+			var ingResult;
+			var url = "https://djibouti-recipe.herokuapp.com/api/ingredients";
+			$.getJSON(url, function( data ) {
+				ingResult = data;
+			}).then(function(){
+				// For each ingredient, add the ingredient and amount as a new entry in table
+				var numTotal = ingResult.length;
+				for(var i = 1; i <= numIngredients; i++){
+					var ingId = ingResult[numTotal - 1]['id'] + i;
+					var toSendForIng = $("#inp" + i + "name").val();
+					var toSendForIngAmt = $("#inp" + i + "amt").val();
+					$.post("https://djibouti-recipe.herokuapp.com/api/ingredients", //Required URL of the page on server
+					{ // Data Sending With Request To Server
+						recipe_id: nextId,
+						name: toSendForIng,
+						amount: toSendForIngAmt
+					},
+					function(response,status){ // Required Callback Function
+						console.log(response);
+						console.log(status);
+					});
 
-			}
+				}}
 		});
 
 	});
