@@ -125,17 +125,19 @@
 				alert('Fill all input fields!');
 				break;
 			}
-			filled = 1;
 		}
 		//check if tilda is present in steps field
 		for(var i = 0; i < numSteps; i++){
-			var steps = document.getElementById('step'+(i+1));
+			var steps = document.getElementById('step'+(i+1)).value;
 			for(var j = 0; j < steps.length; j++){
 				if(steps[j] == '~'){
 					tilda_flag = 1;
 					alert('No tildas are allowed in the steps field');
 					break;
 				}
+			}
+			if(tilda_flag == 1){
+				break;	
 			}
 		}
 		if(filled == 1 && tilda_flag == 0){
