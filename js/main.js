@@ -69,6 +69,8 @@ function addIngredientField(){
 
 function removeIngredientField(){
 	if(numIngredients > 1){
+		document.getElementById("div").remove();
+		document.getElementById("div").remove();
 		document.getElementById("inp"+numIngredients+"name").remove();
 		document.getElementById("inp"+numIngredients+"amt").remove();
 		numIngredients--;
