@@ -39,8 +39,8 @@ function addIngredientField(){
 	if(numIngredients < 10){
 		numIngredients++;
 		var container = document.getElementById("ingredients");
-		var hr = document.createElement("hr");
-		container.appendChild(hr);
+		//var hr = document.createElement("hr");
+		//container.appendChild(hr);
 		var row = document.createElement("div");
 		row.className = "row addform";
 		var col1 = document.createElement("div");
@@ -69,12 +69,6 @@ function addIngredientField(){
 
 function removeIngredientField(){
 	if(numIngredients > 1){
-		document.getElementById("hr").remove();
-		document.getElementById("div").remove();
-		document.getElementById("input").remove();
-		document.getElementById("div").remove();
-		document.getElementById("div").remove();
-		document.getElementById("input").remove();
 		document.getElementById("inp"+numIngredients+"name").remove();
 		document.getElementById("inp"+numIngredients+"amt").remove();
 		numIngredients--;
@@ -86,8 +80,8 @@ function addStepField(){
 	if(numSteps < 10){
 		numSteps++;
 		var container = document.getElementById("steps");
-		var hr = document.createElement("hr");
-		container.appendChild(hr);
+		//var hr = document.createElement("hr");
+		//container.appendChild(hr);
 		var row = document.createElement("div");
 		row.className = "form-group row";
 		var label = document.createElement("label");
