@@ -49,6 +49,7 @@ function addIngredientField(){
 		col1.className = "col";
 		var inp1 = document.createElement("input");
 		inp1.type = "text";
+		inp1.style = "margin-top: 1rem;" 
 		inp1.className = "form-control";
 		inp1.placeholder = "Ingredient " + numIngredients + " Name";
 		inp1.id = "inp" + numIngredients + "name";
