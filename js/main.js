@@ -41,8 +41,8 @@ function addIngredientField(){
 		var container = document.getElementById("ingredients");
 		//var hr = document.createElement("hr");
 		//container.appendChild(hr);
-		//var row = document.createElement("div");
-		//row.className = "row addform";
+		var row = document.createElement("div");
+		row.className = "row addform";
 		var col1 = document.createElement("div");
 		col1.className = "col";
 		var inp1 = document.createElement("input");
@@ -82,8 +82,8 @@ function addStepField(){
 		var container = document.getElementById("steps");
 		//var hr = document.createElement("hr");
 		//container.appendChild(hr);
-		//var row = document.createElement("div");
-		//row.className = "form-group row";
+		var row = document.createElement("div");
+		row.className = "form-group row";
 		var label = document.createElement("label");
 		label.for = "step" + numSteps;
 		label.className = "col-sm-1 col-form-label";
