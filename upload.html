@@ -24,7 +24,7 @@
             <h1 class = "recipe-title">Upload a Recipe!</h1>
             <form method="POST" id = "myform" action="https://djibouti-recipe.herokuapp.com/api/recipes">
                <label for = "repname" class = "fieldlabel"> Recipe Name </label>
-               <input class= "width form-control" id = "repname" type = "text" name = "name" placeholder = "Enter Recipe Name" maxlength = "40">
+               <input class= "width form-control" id = "repname" type = "text" name = "name" placeholder = "Enter Recipe Name" maxlength = "140">
                </br> 
                <label for="categorySelect" class = "fieldlabel">Category</label>
                <select size="3" class="form-control" id="categorySelect" name = "category">
@@ -38,13 +38,13 @@
 			   </br>
 			   
                <label for = "ingredients" class = "fieldlabel"> Ingredients </label>
-			   <div id = "ingredients" maxlength = "40" style="margin-bottom: 1rem;">
+			   <div id = "ingredients" maxlength = "140" style="margin-bottom: 1rem;">
 				   <div class="row">
 					  <div class="col">
-						 <input type="text" class="form-control" placeholder="Ingredient 1 Name" id = "inp1name" maxlength = "40">
+						 <input type="text" class="form-control" placeholder="Ingredient 1 Name" id = "inp1name" maxlength = "140">
 					  </div>
 					  <div class="col">
-						 <input type="text" class="form-control" placeholder="Ingredient Amount (ex: 1 cup, 8 handfuls, etc..)" id = "inp1amt" maxlength = "40">
+						 <input type="text" class="form-control" placeholder="Ingredient Amount (ex: 1 cup, 8 handfuls, etc..)" id = "inp1amt" maxlength = "140">
 					  </div>
 				   </div>
 			   </div>
