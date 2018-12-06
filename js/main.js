@@ -49,7 +49,7 @@ function addIngredientField(){
 		col1.className = "col";
 		var inp1 = document.createElement("input");
 		inp1.type = "text";
-		inp1.style = "margin-top: 12px;" 
+		inp1.style = "margin-top: 11px;" 
 		inp1.className = "form-control";
 		inp1.placeholder = "Ingredient " + numIngredients + " Name";
 		inp1.id = "inp" + numIngredients + "name";
@@ -60,7 +60,7 @@ function addIngredientField(){
 		col2.className = "col";
 		var inp2 = document.createElement("input");
 		inp2.type = "text";
-		inp2.style = "margin-top: 12px;" 
+		inp2.style = "margin-top: 11px;" 
 		inp2.className = "form-control";
 		inp2.placeholder = "Ingredient Amount (ex: 1 cup, 8 handfuls, etc..)";
 		inp2.maxlength = "40";
