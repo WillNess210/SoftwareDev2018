@@ -73,12 +73,9 @@ function addIngredientField(){
 function removeIngredientField(){
 	if(numIngredients > 1){
 		numIngredients--;
-		document.getElementById("row"+numIngredients).remove();
-		delete document.getElementById("row"+numIngredients)
+		/*document.getElementById("row"+numIngredients).remove();
 		document.getElementById("col1"+numIngredients).remove();
-		delete document.getElementById("col1"+numIngredients)
-		document.getElementById("col2"+numIngredients).remove();
-		delete document.getElementById("col2"+numIngredients)
+		document.getElementById("col2"+numIngredients).remove();*/
 		document.getElementById("inp"+numIngredients+"name").remove();
 		document.getElementById("inp"+numIngredients+"amt").remove();
 	}
@@ -118,8 +115,8 @@ function addStepField(){
 function removeStepField(){
 	if(numSteps > 1){
 		numSteps--;
-		document.getElementById("row"+numSteps).remove();
-		document.getElementById("divCol"+numSteps).remove();
+		/*document.getElementById("row"+numSteps).remove();
+		document.getElementById("divCol"+numSteps).remove();*/
 		document.getElementById("step"+numSteps).remove();
 		document.getElementById("label"+numSteps).remove();
 	}
