@@ -42,8 +42,10 @@ function addIngredientField(){
 		//var hr = document.createElement("hr");
 		//container.appendChild(hr);
 		var row = document.createElement("div");
+		row.id = "row"+numIngredients;
 		row.className = "row addform";
 		var col1 = document.createElement("div");
+		col1.id = "col1"+numIngredients;
 		col1.className = "col";
 		var inp1 = document.createElement("input");
 		inp1.type = "text";
@@ -53,6 +55,7 @@ function addIngredientField(){
 		inp1.maxlength = "40";
 		col1.appendChild(inp1);
 		var col2 = document.createElement("div");
+		col2.id = "col1"+numIngredients;
 		col2.className = "col";
 		var inp2 = document.createElement("input");
 		inp2.type = "text";
@@ -69,12 +72,9 @@ function addIngredientField(){
 
 function removeIngredientField(){
 	if(numIngredients > 1){
-		var row_space = document.getElementById("div")
-		row_space.parentNode.removeChild(row_space);
-		var col_space_one = document.getElementById("div")
-		col_space_one.parentNode.removeChild(col_space_one);
-		var col_space_two = document.getElementById("div")
-		col_space_two.parentNode.removeChild(col_space_two);
+		document.getElementById("row"+numIngredients).remove();
+		document.getElementById("col1"+numIngredients).remove();
+		document.getElementById("col2"+numIngredients).remove();
 		document.getElementById("inp"+numIngredients+"name").remove();
 		document.getElementById("inp"+numIngredients+"amt").remove();
 		numIngredients--;
@@ -89,12 +89,15 @@ function addStepField(){
 		//var hr = document.createElement("hr");
 		//container.appendChild(hr);
 		var row = document.createElement("div");
+		row.id = "row"+numSteps;
 		row.className = "form-group row";
 		var label = document.createElement("label");
+		label.id = "label"+numSteps;
 		label.for = "step" + numSteps;
 		label.className = "col-sm-1 col-form-label";
 		label.textContent = "Step " + numSteps;
 		var divCol = document.createElement("div");
+		divCol.id = "divCol"+numSteps;
 		divCol.className = "col-sm-10";
 		var input = document.createElement("input");
 		input.type = "text";
@@ -111,8 +114,10 @@ function addStepField(){
 
 function removeStepField(){
 	if(numSteps > 1){
+		document.getElementById("row"+numSteps).remove();
+		document.getElementById("divCol"+numSteps).remove();
 		document.getElementById("step"+numSteps).remove();
-		document.getElementById("label").remove();
+		document.getElementById("label"+numSteps).remove();
 		numSteps--;
 	}
 }
