@@ -74,8 +74,11 @@ function removeIngredientField(){
 	if(numIngredients > 1){
 		numIngredients--;
 		document.getElementById("row"+numIngredients).remove();
+		delete document.getElementById("row"+numIngredients)
 		document.getElementById("col1"+numIngredients).remove();
+		delete document.getElementById("col1"+numIngredients)
 		document.getElementById("col2"+numIngredients).remove();
+		delete document.getElementById("col2"+numIngredients)
 		document.getElementById("inp"+numIngredients+"name").remove();
 		document.getElementById("inp"+numIngredients+"amt").remove();
 	}
