@@ -69,8 +69,12 @@ function addIngredientField(){
 
 function removeIngredientField(){
 	if(numIngredients > 1){
-		document.getElementById("div").parentNode.removeChild();
-		document.getElementById("div").parentNode.removeChild();
+		var row_space = document.getElementById("div")
+		row_space.parentNode.removeChild(row_space);
+		var col_space_one = document.getElementById("div")
+		col_space_one.parentNode.removeChild(col_space_one);
+		var col_space_two = document.getElementById("div")
+		col_space_two.parentNode.removeChild(col_space_two);
 		document.getElementById("inp"+numIngredients+"name").remove();
 		document.getElementById("inp"+numIngredients+"amt").remove();
 		numIngredients--;
