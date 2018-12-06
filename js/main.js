@@ -53,7 +53,7 @@ function addIngredientField(){
 		inp1.className = "form-control";
 		inp1.placeholder = "Ingredient " + numIngredients + " Name";
 		inp1.id = "inp" + numIngredients + "name";
-		inp1.maxlength = "40";
+		inp1.maxlength = "140";
 		col1.appendChild(inp1);
 		var col2 = document.createElement("div");
 		col2.id = "col1"+numIngredients;
@@ -63,7 +63,7 @@ function addIngredientField(){
 		inp2.style = "margin-top: 11px;" 
 		inp2.className = "form-control";
 		inp2.placeholder = "Ingredient Amount (ex: 1 cup, 8 handfuls, etc..)";
-		inp2.maxlength = "40";
+		inp2.maxlength = "140";
 		inp2.id = "inp" + numIngredients + "amt";
 		col2.appendChild(inp2);
 		row.appendChild(col1);
@@ -106,7 +106,7 @@ function addStepField(){
 		input.className = "form-control";
 		input.id = "step" + numSteps;
 		input.placeholder = "Step Details";
-		input.maxlength = "140";
+		input.maxlength = "280";
 		row.appendChild(label);
 		divCol.appendChild(input);
 		row.appendChild(divCol);
