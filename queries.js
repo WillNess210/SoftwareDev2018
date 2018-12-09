@@ -152,7 +152,7 @@ const deleteIngredient = function(req, res){
 };
 
 const addUser = function(req, res){
-	const {id, username, email, hash_pass} = req.body;
+	const {username, email, hash_pass} = req.body;
 	pool.query('insert into users (username, email, hash_pass) values($1,$2,$3)', [username, email, hash_pass], function(err, results){
 		if(err){
 			throw err;

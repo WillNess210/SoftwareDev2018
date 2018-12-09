@@ -160,6 +160,15 @@ app.get("/logout", function(req, res){
   }
 });
 
+app.get("/register", function(req, res){
+  if(!req.session.user_id){
+    res.sendFile(__dirname + "/register.html");
+  }
+  else{
+    res.redirect("/dashboard");
+  }
+});
+
 app.listen(port, function() {
 	console.log("app running");
 });

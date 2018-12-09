@@ -21,16 +21,18 @@
 	</nav>
 	<form action="">
 		<label for="uname"><b>Username</b></label>
-		<input type="text" class="form-control" placeholder="Enter Username" name="uname" required>
+		<input type="text" id="uname" class="form-control" placeholder="Enter Username" name="uname" required>
 
 		<label for="psw"><b>Password</b></label>
-		<input type="password" class="form-control" placeholder="Enter Password" name="psw" required>
+		<input type="password" id="pwd" class="form-control" placeholder="Enter Password" name="psw" required>
 		
 		<label for="psw"><b>E-Mail</b></label>
-		<input type="email" class="form-control" placeholder="Enter Email" name="email" required>
+		<input type="email" id="email" class="form-control" placeholder="Enter Email" name="email" required>
 		<br />
 		<button type="submit" class="btn btn-success">Register</button>
 	</form>
+  <br>
+  <label style="color:red" id="error"></label>
 
       <!-- /.container -->
       <!-- Bootstrap core JavaScript
@@ -44,9 +46,31 @@
     <script src="js/ie10-viewport-bug-workaround.js"></script>
     
    <script>
-      //$( document ).ready(function() {
+      $( document ).ready(function() {
          $('#nav').load('predone/navbar.html');
-      //}
+         $('button').click(function(){
+            var username = $("#uname").val();
+            var password = $("#pwd").val();
+            var email = $("#email").val();
+            var linkUser = "https://djibouti-recipe.herokuapp.com/api/users";
+            $.getJSON(linkUser,{format: "json"}).done(function(data){
+              var found = false
+              for(var i = 0; i < data.length; i++){
+                if(data[i].username == username){
+                  found = true;
+                  $("#error").text("An account already exists with this username");
+                  break;
+                }
+              }
+
+              if(found === false){
+                $.post(linkUser, {"username":username, "email":email, "hash_pass": password}, "json"). done(function(){
+                  window.location.replace('/signin');
+                });
+              }
+            }
+         });
+      }
    </script>
   </body>
 </html>
