@@ -3,7 +3,6 @@
 	"version": "1.0.0",
 	"scripts": {
 		"start": "node api.js",
-		"test": "jest"
 	},
 	"dependencies": {
 		"express": "4.16.4",
@@ -16,7 +15,4 @@
 	},
 	"author": "letscodedjibouti",
 	"license": "ISC",
-	"devDependencies": {
-		"jest": "^23.6.0"
-	}
 }
