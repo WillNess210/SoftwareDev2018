@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link rel="icon" href="../../favicon.ico">
+      <title>Upload</title>
+	  <script src="js/main.js"> </script>
+      <!-- Bootstrap core CSS -->
+      <link href="css/bootstrap.min.css" rel="stylesheet">
+	  <!-- Font-Awesome Icons -->
+	  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+      <!-- Custom styles for this template -->
+      <link href="css/main.css" rel="stylesheet">
+   </head>
+   <body>
+      <nav id = "nav">
+	
+	</nav>
+      <div class="container">
+         <div class="upload-template">
+            <h1 class = "recipe-title">Upload a Recipe!</h1>
+            <form method="POST" id = "myform" action="https://djibouti-recipe.herokuapp.com/api/recipes">
+               <label for = "repname" class = "fieldlabel"> Recipe Name </label>
+               <input class= "width form-control" id = "repname" type = "text" name = "name" placeholder = "Enter Recipe Name" maxlength = "140">
+               </br> 
+               <label for="categorySelect" class = "fieldlabel">Category</label>
+               <select size="3" class="form-control" id="categorySelect" name = "category">
+                  <option value = "0">Breakfast</option>
+                  <option value = "1">Lunch</option>
+                  <option value = "2">Dinner</option>
+                  <option value = "3">Snack</option>
+                  <option value = "4">Dessert</option>
+				  <option value = "5">Other</option>
+               </select>
+			   </br>
+			   
+               <label for = "ingredients" class = "fieldlabel"> Ingredients </label>
+			   <div id = "ingredients" maxlength = "140" style="margin-bottom: 1rem;">
+				   <div class="row">
+					  <div class="col">
+						 <input type="text" class="form-control" placeholder="Ingredient 1 Name" id = "inp1name" maxlength = "140">
+					  </div>
+					  <div class="col">
+						 <input type="text" class="form-control" placeholder="Ingredient Amount (ex: 1 cup, 8 handfuls, etc..)" id = "inp1amt" maxlength = "140">
+					  </div>
+				   </div>
+			   </div>
+			   <input type="button" value="Add an Ingredient" class="addbutton btn btn-primary" id="add" onclick = "addIngredientField()"/>
+	      		   <input type="button" style="background-color: red; border-color: red;" value="Remove an Ingredient" class="removebutton btn btn-primary" id="remove" onclick = "removeIngredientField()"/>
+               </br> </br>
+			   
+			   <label for = "steps" class = "fieldlabel"> Steps </label>
+			   <div id = "steps" maxlength = "140">
+				<div class="form-group row">
+					<label for="step1" class="col-sm-1 col-form-label">Step 1</label>
+					<div class="col-sm-10">
+					  <input type="text" class="form-control" id="step1" placeholder="Step Details" name = "steps" maxlength = "140">
+					</div>
+				  </div>
+				</div>
+			   <input type="button" value="Add a Step" class="addbutton btn btn-primary" id="add" onclick = "addStepField()"/>
+		           <input type="button" style="background-color: red; border-color: red;" value="Remove a Step" class="removebutton btn btn-primary" id="remove" onclick = "removeStepField()"/>
+
+               </br> </br>
+			   
+               <label for="privateCheck" class = "fieldlabel">Recipe Private?</label>
+               <input class="" type="checkbox" id="privateCheck" name = "public">
+			   </br></br>
+			   
+			   
+            </form>
+			<button type="submit" class="btn btn-success" id = "submitbutton">Submit</button>
+         </div>
+         <hr>
+         <footer>
+            <p>&copy; Let's Code Djibouti </p>
+         </footer>
+      </div>
+      <!-- /.container -->
+      <!-- Bootstrap core JavaScript
+         ================================================== -->
+      <!-- Placed at the end of the document so the pages load faster -->
+    <script src = "components/jquery/jquery-3.3.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"><\/script>')</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+   <script>
+    $( document ).ready(function() {
+		$('#nav').load('predone/navbar.html');
+	});
+	/*
+	$('#myform').submit(function() {
+		var toSendForSteps = $("#step1").val();
+		for(var i = 2; i <= numSteps; i++){
+			toSendForSteps += "~" + $("#step" + i).val();
+		}
+		$("#step1").val(toSendForSteps);
+		var checkResult = !($("#privateCheck").is(":checked"));
+		$("#privateCheck").val(checkResult);
+		$("#privateCheck").attr("checked", "checked");
+		alert(checkResult);
+		//$(this).append(newFormField);
+		event.preventDefault();
+		//return false;
+	}); */
+	   
+	/* Submit not clickable until all text fields are filled in
+	while(){
+	     
+	}*/
+
+	$( "#submitbutton" ).click(function() {
+		//check if inputs are filled
+		var filled = 1;
+		var op_filled = 1;
+		var tilda_flag = 0;
+		var selection = document.getElementById('categorySelect').value;
+		console.log(selection);
+		if(selection == ''){
+			op_filled = 0;
+		}
+		var inputs = document.getElementsByTagName('input');
+		for(var i = 0; i < inputs.length; i++){
+			if(inputs[i].value == '' || op_filled == 0){
+				filled = 0;
+				alert('Fill all input fields');
+				break;
+			}
+		}
+		//check if tilda is present in steps field
+		for(var i = 0; i < numSteps; i++){
+			var steps = document.getElementById('step'+(i+1)).value;
+			for(var j = 0; j < steps.length; j++){
+				if(steps[j] == '~'){
+					tilda_flag = 1;
+					alert('No tildas are allowed in the steps field');
+					break;
+				}
+			}
+			if(tilda_flag == 1){
+				break;	
+			}
+		}
+		if(filled == 1 && tilda_flag == 0){
+			// Recipes input
+			var nextId = -1;
+			var recipeResult;
+			var url = "https://djibouti-recipe.herokuapp.com/api/recipes";
+			$.getJSON(url, function( data ) {
+				recipeResult = data;
+			}).then(function(){
+				var numRecipes = recipeResult.length;
+				nextId = recipeResult[numRecipes - 1]['id'] + 1;
+				var repname = $("#repname").val();
+				var categoryval = $("#categorySelect").val();
+				var checkResult = !($("#privateCheck").is(":checked"));
+				var toSendForSteps = $("#step1").val();
+				for(var i = 2; i <= numSteps; i++){
+					toSendForSteps += "~" + $("#step" + i).val();
+				}
+				$.post("https://djibouti-recipe.herokuapp.com/api/recipes", //Required URL of the page on server
+				{ // Data Sending With Request To Server
+					owner_id: <%= user_id %>, // Change the owner_id ////////////////////////////////////////////////////////
+					name: repname,
+					category: categoryval,
+					public: checkResult,
+					steps: toSendForSteps
+				},
+				function(response,status){ // Required Callback Function
+					console.log(response);
+					console.log(status);
+				});
+			});
+
+			// Ingredients input
+			var ingResult;
+			var url = "https://djibouti-recipe.herokuapp.com/api/ingredients";
+			$.getJSON(url, function( data ) {
+				ingResult = data;
+			}).then(function(){
+				// For each ingredient, add the ingredient and amount as a new entry in table
+				var numTotal = ingResult.length;
+				for(var i = 1; i <= numIngredients; i++){
+					var ingId = ingResult[numTotal - 1]['id'] + i;
+					var toSendForIng = $("#inp" + i + "name").val();
+					var toSendForIngAmt = $("#inp" + i + "amt").val();
+					$.post("https://djibouti-recipe.herokuapp.com/api/ingredients", //Required URL of the page on server
+					{ // Data Sending With Request To Server
+						recipe_id: nextId,
+						name: toSendForIng,
+						amount: toSendForIngAmt
+					},
+					function(response,status){ // Required Callback Function
+						console.log(response);
+						console.log(status);
+					});
+
+				}
+		});
+		}
+
+	});
+   </script>
+  </body>
+</html>

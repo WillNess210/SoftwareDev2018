@@ -98,7 +98,7 @@ app.get("/upload", function(req, res){
 	if(!req.session.user_id)
 		res.redirect("/signin");
 	else
-		res.sendFile(__dirname + "/upload.html");
+		res.render('upload', {user_id: req.session.user_id});
 });
 
 app.get("/signin",function(req, res){
@@ -123,9 +123,6 @@ app.post("/signin",function(req, res){
   //https://stackoverflow.com/questions/39037494/send-data-with-jquery-to-node-application
   if(!req.session.user_id){
     req.session.user_id = parseInt(req.body.id);
-    console.log("Redirecting");
-    console.log(req.body);
-    console.log(req.session.user_id);
     res.redirect("/dashboard");
   }
   else{
