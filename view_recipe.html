@@ -38,8 +38,7 @@
 		</script>
 		</p> -->
 		<a href = "#" class = "lead recipe-item valid btn btn-secondary" id = "usernameholder">By: (USERNAME)</a>
-		<!--<input type="button" value="Copy Url" onclick="copyURL();" />
-		Paste: <textarea id="urlCopied" rows="1" cols="30"></textarea>-->
+		
 
         <h1 class = "recipe-title" id = "recipe-title">Recipe Name Here</h1>
 		<p class="lead recipe-title" id = "recipe-category">(CATEGORY) </p>
@@ -49,8 +48,14 @@
 		<h2 class = "recipe-title valid"> Steps </h2>
 		<div id = "steps">
 		</div>
-		<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-		<a id="fbButton" href="https://www.facebook.com/sharer/sharer.php?u=http://djibouti-recipe.herokuapp.com/view_recipe.html?rid=40" target="_blank">Share on Facebook</a>
+		<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="valid twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+		</br>
+		</br>
+		<a id="fbButton" class = "valid lead btn btn-secondary" href="https://www.facebook.com/sharer/sharer.php?u=http://djibouti-recipe.herokuapp.com/view_recipe.html?rid=40" target="_blank">Share on Facebook</a>
+		</br>
+		</br>
+		<a class = "valid lead btn btn-secondary" href="#" onclick = "copyURL();">Copy URL </a>
+		
       </div>
 	<hr>
 
@@ -77,12 +82,8 @@
 	}
 
 	//attempting to copy the url with this funciton
-	function Copy() {
-	  var Url = document.getElementById("url");
-	  Url.innerHTML = window.location.href;
-	  console.log(Url.innerHTML)
-	  Url.select();
-	  document.execCommand("copy");
+	function copyURL() {
+	  alert(window.location.href);
 	}
 	
 	$( document ).ready(function() {

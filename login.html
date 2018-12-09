@@ -27,6 +27,9 @@
 		<input type="password" class="form-control" placeholder="Enter Password" id="pass" required>
 		<br />
 		<button type="submit" class="btn btn-success">Login</button>
+		<br>
+		<label style="color:red" id="error"></label>
+		<label style="color:red" id="error2"></label>	
 	</div>
 
 
@@ -38,6 +41,7 @@
     <script src = "components/jquery/jquery-3.3.1.min.js"></script>
     <script>window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"><\/script>')</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/md5.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
@@ -51,18 +55,27 @@
          	var link = "https://djibouti-recipe.herokuapp.com/api/users";
          	$.getJSON(link,{format: "json"}).done(function(data){
          		console.log("Logging in");
+         		var found = false;
          		for(var i = 0; i < data.length; i++){
          				if(data[i].username === username){
          					console.log("Found User");
+         					found = true;
+         					//do hashing here: https://stackoverflow.com/questions/18585159/how-to-convert-password-into-md5-in-jquery
+         					//$("#error2").text(CryptoJS.MD5(password));
          					if(data[i].password === password){
    								var id = data[i].id;
    								$.post("https://djibouti-recipe.herokuapp.com/signin", {"id": id}, "json").done(function(){window.location.replace('/dashboard');});
+   								break;
          					}
          					else{
-         						console.log("Wrong password");
+         						$("#error").text("Wrong Password");
+         						break;
          					}
          				}
-         			}
+         		}
+         		if(found === false){
+         			$("#error").text("No Account found");
+         		}
          	});
          });
       });

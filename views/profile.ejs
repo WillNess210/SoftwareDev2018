@@ -104,7 +104,7 @@
 				$("#usernameholder").html(username);
 			});
 			
-			url = "https://djibouti-recipe.herokuapp.com/api/recipes/user-public/" + <%= user_id %>;
+			url = "https://djibouti-recipe.herokuapp.com/api/recipes/user/" + <%= user_id %>;
 			var recipeResult;
 			$.getJSON(url, function( data ) {
 				recipeResult = data;
@@ -114,7 +114,13 @@
 					var ownerId = recipeResult[i]['owner_id'];
 					var recipeId = recipeResult[i]['id'];
 					var recipeName = recipeResult[i]['name'];
-					var text = "<a href = \"view_recipe.html?rid=" + recipeId + "\"> " + recipeName + " </a>";
+					var recipePublic = recipeResult[i]['public'];
+					console.log(recipePublic);
+					if(recipePublic){
+						var text = "<a href = \"view_recipe.html?rid=" + recipeId + "\"> " + recipeName + " </a>";
+					}else{
+						var text = "<a style = \"background-color: #ff9999;\" href = \"view_recipe.html?rid=" + recipeId + "\"> " + recipeName + " </a>";
+					}
                         //<a href="#">Recipe 2</a>
                     $("#recipe-load").append(text);
 				}

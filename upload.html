@@ -24,7 +24,7 @@
             <h1 class = "recipe-title">Upload a Recipe!</h1>
             <form method="POST" id = "myform" action="https://djibouti-recipe.herokuapp.com/api/recipes">
                <label for = "repname" class = "fieldlabel"> Recipe Name </label>
-               <input class= "width form-control" id = "repname" type = "text" name = "name" placeholder = "Enter Recipe Name" maxlength = "40">
+               <input class= "width form-control" id = "repname" type = "text" name = "name" placeholder = "Enter Recipe Name" maxlength = "140">
                </br> 
                <label for="categorySelect" class = "fieldlabel">Category</label>
                <select size="3" class="form-control" id="categorySelect" name = "category">
@@ -38,21 +38,22 @@
 			   </br>
 			   
                <label for = "ingredients" class = "fieldlabel"> Ingredients </label>
-			   <div id = "ingredients">
+			   <div id = "ingredients" maxlength = "140" style="margin-bottom: 1rem;">
 				   <div class="row">
 					  <div class="col">
-						 <input type="text" class="form-control" placeholder="Ingredient 1 Name" id = "inp1name" maxlength = "40">
+						 <input type="text" class="form-control" placeholder="Ingredient 1 Name" id = "inp1name" maxlength = "140">
 					  </div>
 					  <div class="col">
-						 <input type="text" class="form-control" placeholder="Ingredient Amount (ex: 1 cup, 8 handfuls, etc..)" id = "inp1amt" maxlength = "40">
+						 <input type="text" class="form-control" placeholder="Ingredient Amount (ex: 1 cup, 8 handfuls, etc..)" id = "inp1amt" maxlength = "140">
 					  </div>
 				   </div>
 			   </div>
-			   <input type="button" value="Add a field" class="addbutton btn btn-primary" id="add" onclick = "addIngredientField()"/>
+			   <input type="button" value="Add an Ingredient" class="addbutton btn btn-primary" id="add" onclick = "addIngredientField()"/>
+	      		   <input type="button" style="background-color: red; border-color: red;" value="Remove an Ingredient" class="removebutton btn btn-primary" id="remove" onclick = "removeIngredientField()"/>
                </br> </br>
 			   
 			   <label for = "steps" class = "fieldlabel"> Steps </label>
-			   <div id = "steps">
+			   <div id = "steps" maxlength = "140">
 				<div class="form-group row">
 					<label for="step1" class="col-sm-1 col-form-label">Step 1</label>
 					<div class="col-sm-10">
@@ -60,7 +61,9 @@
 					</div>
 				  </div>
 				</div>
-			   <input type="button" value="Add a field" class="addbutton btn btn-primary" id="add" onclick = "addStepField()"/>
+			   <input type="button" value="Add a Step" class="addbutton btn btn-primary" id="add" onclick = "addStepField()"/>
+		           <input type="button" style="background-color: red; border-color: red;" value="Remove a Step" class="removebutton btn btn-primary" id="remove" onclick = "removeStepField()"/>
+
                </br> </br>
 			   
                <label for="privateCheck" class = "fieldlabel">Recipe Private?</label>
@@ -105,83 +108,101 @@
 		event.preventDefault();
 		//return false;
 	}); */
-	
-	// Restrict add value button
-	$("#add").click(function() {
-		if (numIngredients == 10) {
-			$("#add").attr('disabled', 'disabled');
-		}
-		else {
-			$("#add").removeAttr('disabled');
-		}
-		},
-		function(response,status){ // Required Callback Function
-			console.log(response);
-			console.log(status);
-		});
+	   
 	/* Submit not clickable until all text fields are filled in
 	while(){
 	     
 	}*/
+
 	$( "#submitbutton" ).click(function() {
-		var nextId = -1;
-		var recipeResult;
-
-                // Recipes input
-		var url = "https://djibouti-recipe.herokuapp.com/api/recipes";
-		$.getJSON(url, function( data ) {
-			recipeResult = data;
-		}).then(function(){
-			var numRecipes = recipeResult.length;
-			nextId = recipeResult[numRecipes - 1]['id'] + 1;
-			var repname = $("#repname").val();
-			var categoryval = $("#categorySelect").val();
-			var checkResult = !($("#privateCheck").is(":checked"));
-			var toSendForSteps = $("#step1").val();
-			for(var i = 2; i <= numSteps; i++){
-				toSendForSteps += "~" + $("#step" + i).val();
+		//check if inputs are filled
+		var filled = 1;
+		var op_filled = 1;
+		var tilda_flag = 0;
+		var selection = document.getElementById('categorySelect').value;
+		console.log(selection);
+		if(selection == ''){
+			op_filled = 0;
+		}
+		var inputs = document.getElementsByTagName('input');
+		for(var i = 0; i < inputs.length; i++){
+			if(inputs[i].value == '' || op_filled == 0){
+				filled = 0;
+				alert('Fill all input fields');
+				break;
 			}
-			$.post("https://djibouti-recipe.herokuapp.com/api/recipes", //Required URL of the page on server
-			{ // Data Sending With Request To Server
-                                owner_id: 1,
-				id: nextId,
-				name: repname,
-				category: categoryval,
-				public: checkResult,
-				steps: toSendForSteps
-			},
-			function(response,status){ // Required Callback Function
-				console.log(response);
-				console.log(status);
+		}
+		//check if tilda is present in steps field
+		for(var i = 0; i < numSteps; i++){
+			var steps = document.getElementById('step'+(i+1)).value;
+			for(var j = 0; j < steps.length; j++){
+				if(steps[j] == '~'){
+					tilda_flag = 1;
+					alert('No tildas are allowed in the steps field');
+					break;
+				}
+			}
+			if(tilda_flag == 1){
+				break;	
+			}
+		}
+		if(filled == 1 && tilda_flag == 0){
+			// Recipes input
+			var nextId = -1;
+			var recipeResult;
+			var url = "https://djibouti-recipe.herokuapp.com/api/recipes";
+			$.getJSON(url, function( data ) {
+				recipeResult = data;
+			}).then(function(){
+				var numRecipes = recipeResult.length;
+				nextId = recipeResult[numRecipes - 1]['id'] + 1;
+				var repname = $("#repname").val();
+				var categoryval = $("#categorySelect").val();
+				var checkResult = !($("#privateCheck").is(":checked"));
+				var toSendForSteps = $("#step1").val();
+				for(var i = 2; i <= numSteps; i++){
+					toSendForSteps += "~" + $("#step" + i).val();
+				}
+				$.post("https://djibouti-recipe.herokuapp.com/api/recipes", //Required URL of the page on server
+				{ // Data Sending With Request To Server
+					owner_id: 17, // Change the owner_id ////////////////////////////////////////////////////////
+					name: repname,
+					category: categoryval,
+					public: checkResult,
+					steps: toSendForSteps
+				},
+				function(response,status){ // Required Callback Function
+					console.log(response);
+					console.log(status);
+				});
 			});
-		});
 
-                // Ingredients input
-                var ingResult;
-		var url = "https://djibouti-recipe.herokuapp.com/api/ingredients";
-		$.getJSON(url, function( data ) {
-			ingResult = data;
-		}).then(function(){
-                        // For each ingredient, add the ingredient and amount as a new entry in table
-			var numTotal = ingResult.length;
-			for(var i = 1; i <= numIngredients; i++){
-                                var ingId = ingResult[numTotal - 1]['id'] + i;
-				var toSendForIng = $("#inp" + i + "name").val();
-				var toSendForIngAmt = $("#inp" + i + "amt").val();
-                                $.post("https://djibouti-recipe.herokuapp.com/api/ingredients", //Required URL of the page on server
-                                { // Data Sending With Request To Server
-                                        id: ingId,
-                                        recipe_id: nextId,
-                                        name: toSendForIng,
-                                        amount: toSendForIngAmt
-                                },
-                                function(response,status){ // Required Callback Function
-                                        console.log(response);
-                                        console.log(status);
-                                });
+			// Ingredients input
+			var ingResult;
+			var url = "https://djibouti-recipe.herokuapp.com/api/ingredients";
+			$.getJSON(url, function( data ) {
+				ingResult = data;
+			}).then(function(){
+				// For each ingredient, add the ingredient and amount as a new entry in table
+				var numTotal = ingResult.length;
+				for(var i = 1; i <= numIngredients; i++){
+					var ingId = ingResult[numTotal - 1]['id'] + i;
+					var toSendForIng = $("#inp" + i + "name").val();
+					var toSendForIngAmt = $("#inp" + i + "amt").val();
+					$.post("https://djibouti-recipe.herokuapp.com/api/ingredients", //Required URL of the page on server
+					{ // Data Sending With Request To Server
+						recipe_id: nextId,
+						name: toSendForIng,
+						amount: toSendForIngAmt
+					},
+					function(response,status){ // Required Callback Function
+						console.log(response);
+						console.log(status);
+					});
 
-			}
+				}
 		});
+		}
 
 	});
    </script>
