@@ -62,6 +62,15 @@
          					//$("#error2").text(CryptoJS.MD5(password));
                   //console.log(password);
                   //console.log(data[i].hash_pass);
+                  
+                  var passwordHash = require('password-hash');
+                  var hashedPassword = passwordHash.generate('badpassword');
+                  var check = passwordHash.generate('badpassword');
+                  console.log("Start Password Section");
+                  console.log(hashedPassword);
+                  console.log(check);
+                  console.log("End Password Section");
+                  
          					if(data[i].hash_pass == password){
                     console.log("Right password");
    								   var id = data[i].id;
