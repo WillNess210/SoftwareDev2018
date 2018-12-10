@@ -50,7 +50,6 @@
          $("button").click(function(){
          	var username = $("#user").val();
          	var password = $("#pass").val();
-         	var id = "";
          	var link = "https://djibouti-recipe.herokuapp.com/api/users";
          	$.getJSON(link,{format: "json"}).done(function(data){
          		console.log("Logging in");
@@ -61,7 +60,8 @@
          					found = true;
          					//do hashing here: https://stackoverflow.com/questions/18585159/how-to-convert-password-into-md5-in-jquery
          					//$("#error2").text(CryptoJS.MD5(password));
-         					if(data[i].password == password){
+         					if(data[i].hash_pass == password){
+                    console.log("Right password");
    								   var id = data[i].id;
    								   $.post("https://djibouti-recipe.herokuapp.com/signin", {"id": id}, "json").done(function(){window.location.replace('/dashboard');});
    								   break;
