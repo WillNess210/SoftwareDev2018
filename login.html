@@ -63,7 +63,7 @@
                   //console.log(password);
                   //console.log(data[i].hash_pass);
                   
-                  var passwordHash = require('password-hash');
+                  var passwordHash = require('./node_module/password-hash');
                   var hashedPassword = passwordHash.generate('badpassword');
                   var check = passwordHash.generate('badpassword');
                   console.log("Start Password Section");
