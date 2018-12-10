@@ -67,7 +67,7 @@
 
               if(found === false){
               	var hash = CryptoJS.MD5(password);
-              	console.log(hash.val());
+              	console.log(hash.toString());
                 $.post(linkUser, {"username":username, "email":email, "hash_pass": hash}, "json"). done(function(){
                   window.location.replace('/signin');
                 });
