@@ -62,11 +62,12 @@
          					//$("#error2").text(CryptoJS.MD5(password));
                   //console.log(password);
                   //console.log(data[i].hash_pass);
-                  var hash = CryptoJS.MD5("badPass");
-                  var hashCheck = CryptoJS.MD5("badPass");
-                  alert(hash + " , " + hashCheck);
-                  
-         					if(data[i].hash_pass == password){
+                  var hash = CryptoJS.MD5(password);
+                  alert(hash);
+                  //var hashCheck = CryptoJS.MD5("badPass");
+                  //alert(hash + " , " + hashCheck);
+
+         					if(data[i].hash_pass == hash){
                     console.log("Right password");
    								   var id = data[i].id;
    								   $.post("https://djibouti-recipe.herokuapp.com/signin", {"id": id}, "json").done(function(){window.location.replace('/dashboard');});
