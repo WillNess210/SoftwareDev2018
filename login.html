@@ -63,6 +63,7 @@
                   //console.log(password);
                   //console.log(data[i].hash_pass);
                   var hash = CryptoJS.MD5(password);
+                  console.log(hash);
                   if (data[i].hash_pass == hash){
                     alert("yup");
                   }
