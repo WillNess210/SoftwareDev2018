@@ -73,7 +73,12 @@
 	<script>
 		$( document ).ready(function() {
 			$('#nav').load('predone/navbar.html');
-      alert(window.location.href);
+      var current_url = window.location.href;
+      if (current_url != "http://djibouti-recipe.herokuapp.com/")
+      {
+        alert("not https");
+      }
+
 			url = "https://djibouti-recipe.herokuapp.com/api/recipes/";
 			var recipeResult;
 			$.getJSON(url, function( data ) {
