@@ -198,6 +198,8 @@
 					function(response,status){ // Required Callback Function
 						console.log(response);
 						console.log(status);
+						if(status === "success")
+							window.location.replace('/dashboard');
 					});
 
 				}
