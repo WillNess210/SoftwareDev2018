@@ -155,7 +155,14 @@
 				recipeResult = data;
 			}).then(function(){
 				var numRecipes = recipeResult.length;
-				nextId = recipeResult[numRecipes - 1]['id'] + 1;
+				if(numRecipes != 0)
+				{
+					nextId = recipeResult[numRecipes - 1]['id'] + 1;
+				}
+				else
+				{
+					nextId = 0;
+				}
 				var repname = $("#repname").val();
 				var categoryval = $("#categorySelect").val();
 				var checkResult = !($("#privateCheck").is(":checked"));
