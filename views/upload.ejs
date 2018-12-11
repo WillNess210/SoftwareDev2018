@@ -175,35 +175,36 @@
 					console.log(response);
 					console.log(status);
 				});
+				// Ingredients input
+				var ingResult;
+				var url = "https://djibouti-recipe.herokuapp.com/api/ingredients";
+				$.getJSON(url, function( data ) {
+					ingResult = data;
+				}).then(function(){
+					// For each ingredient, add the ingredient and amount as a new entry in table
+					var numTotal = ingResult.length;
+					for(var i = 1; i <= numIngredients; i++){
+						var ingId = ingResult[numTotal - 1]['id'] + i;
+						var toSendForIng = $("#inp" + i + "name").val();
+						var toSendForIngAmt = $("#inp" + i + "amt").val();
+						$.post("https://djibouti-recipe.herokuapp.com/api/ingredients", //Required URL of the page on server
+						{ // Data Sending With Request To Server
+							recipe_id: nextId,
+							name: toSendForIng,
+							amount: toSendForIngAmt
+						},
+						function(response,status){ // Required Callback Function
+							console.log(response);
+							console.log(status);
+							if(status === "success")
+								window.location.replace('/dashboard');
+						});
+
+					}
+				});
 			});
 
-			// Ingredients input
-			var ingResult;
-			var url = "https://djibouti-recipe.herokuapp.com/api/ingredients";
-			$.getJSON(url, function( data ) {
-				ingResult = data;
-			}).then(function(){
-				// For each ingredient, add the ingredient and amount as a new entry in table
-				var numTotal = ingResult.length;
-				for(var i = 1; i <= numIngredients; i++){
-					var ingId = ingResult[numTotal - 1]['id'] + i;
-					var toSendForIng = $("#inp" + i + "name").val();
-					var toSendForIngAmt = $("#inp" + i + "amt").val();
-					$.post("https://djibouti-recipe.herokuapp.com/api/ingredients", //Required URL of the page on server
-					{ // Data Sending With Request To Server
-						recipe_id: nextId,
-						name: toSendForIng,
-						amount: toSendForIngAmt
-					},
-					function(response,status){ // Required Callback Function
-						console.log(response);
-						console.log(status);
-						if(status === "success")
-							window.location.replace('/dashboard');
-					});
-
-				}
-		});
+			
 		}
 
 	});
