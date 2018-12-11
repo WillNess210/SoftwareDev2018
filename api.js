@@ -151,13 +151,13 @@ app.get("/dashboard",function(req, res){
 });
 
 app.get("/logout", function(req, res){
-  if(!req.session.user_id){
-    console.log("You're stupid you should've logged in first");
-  }
-  else{
+  //if(!req.session.user_id){
+  //  console.log("You're stupid you should've logged in first");
+  //}
+  //else{
     req.session = null;
     res.redirect("/");
-  }
+  //}
 });
 
 app.get("/register", function(req, res){
