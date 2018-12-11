@@ -58,7 +58,8 @@
 				var numRecipes = recipeResult.length;
 				var numLoaded = 0;
 				var numToLoad = 6;
-				while(numLoaded != numToLoad){
+				var numAttempts = 100;
+				while(numLoaded != numToLoad && numAttempts > 0){
 					var i = Math.floor(Math.random() * numRecipes);
 					var ownerId = recipeResult[i]['owner_id'];
 					var recipeId = recipeResult[i]['id'];
@@ -71,6 +72,7 @@
 						numLoaded++;
 						recipeResult[i]['public'] = false;
 					}
+					numAttempts--;
 				}
 			});
 		});
