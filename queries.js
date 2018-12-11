@@ -28,7 +28,7 @@ const makeRecipe = function(req, res){
 };
 
 const getRecipe = function(req, res){
-	pool.query('select * from recipes', function(err, results){
+	pool.query('select * from recipes order by id asc', function(err, results){
 		if(err){
 			throw err;
 		}
