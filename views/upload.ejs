@@ -191,7 +191,14 @@
 					// For each ingredient, add the ingredient and amount as a new entry in table
 					var numTotal = ingResult.length;
 					for(var i = 1; i <= numIngredients; i++){
-						var ingId = ingResult[numTotal - 1]['id'] + i;
+						if (numTotal != 0)
+						{
+							var ingId = ingResult[numTotal - 1]['id'] + i;
+						}
+						else
+						{
+							ingId = 0;
+						}
 						var toSendForIng = $("#inp" + i + "name").val();
 						var toSendForIngAmt = $("#inp" + i + "amt").val();
 						$.post("https://djibouti-recipe.herokuapp.com/api/ingredients", //Required URL of the page on server
