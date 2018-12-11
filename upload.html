@@ -155,7 +155,7 @@
 				recipeResult = data;
 			}).then(function(){
 				var numRecipes = recipeResult.length;
-				alert(numRecipes);
+				console.log(numRecipes);
 				if(numRecipes != 0)
 				{
 					nextId = recipeResult[numRecipes - 1]['id'] + 1;
